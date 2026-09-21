@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import { Dialog } from "@base-ui/react/dialog";
 import { Play, X } from "lucide-react";
@@ -24,10 +24,26 @@ interface StoryVideoProps {
  * Dialog Base UI dipakai supaya fokus terkunci, Escape menutup, dan latar
  * belakangnya tidak bisa digulir — hal-hal yang harus ditulis sendiri kalau
  * memakai overlay buatan tangan.
+ *
+ * Pemutaran dimulai lewat panggilan imperatif, bukan atribut autoPlay, dengan
+ * cadangan senyap: peramban menolak autoplay bersuara kalau aktivasi pengguna
+ * dianggap sudah kedaluwarsa, dan tanpa cadangan itu videonya diam total.
+ * Berkas saat ini memang tidak punya jalur audio, tapi jalur ini sudah siap
+ * begitu berkasnya diganti dengan yang bersuara.
  */
 export function StoryVideo({ src, poster, alt, label }: StoryVideoProps) {
   const [open, setOpen] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const attachVideo = useCallback((node: HTMLVideoElement | null) => {
+    videoRef.current = node;
+    if (!node) return;
+    node.muted = false;
+    node.play().catch(() => {
+      node.muted = true;
+      void node.play();
+    });
+  }, []);
 
   return (
     <Dialog.Root
@@ -72,11 +88,10 @@ export function StoryVideo({ src, poster, alt, label }: StoryVideoProps) {
             </Dialog.Close>
 
             <video
-              ref={videoRef}
+              ref={attachVideo}
               src={src}
               poster={poster}
               controls
-              autoPlay
               playsInline
               className="aspect-video w-full rounded-xl bg-black"
             />

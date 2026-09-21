@@ -3,9 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu as MenuIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { MobileNav } from "@/components/mobile-nav";
 import { SITE, WA_RESERVASI } from "@/lib/site";
 
 const NAV_LINKS = [
@@ -15,14 +13,16 @@ const NAV_LINKS = [
   { label: "Galeri", href: "#galeri", id: "galeri" },
   { label: "Reservasi", href: "#lokasi", id: "lokasi" },
   { label: "Kontak", href: "#kontak", id: "kontak" },
-];
+] as const;
+
+const SECTION_IDS = NAV_LINKS.map((link) => link.id);
 
 /**
  * Menandai tautan yang bagiannya sedang terlihat. Ambang atas -45% membuat
  * pergantian terjadi saat bagian melewati sepertiga atas layar, bukan saat
  * ujungnya baru menyentuh tepi bawah.
  */
-function useActiveSection(ids: string[]) {
+function useActiveSection(ids: readonly string[]) {
   const [active, setActive] = useState(ids[0]);
 
   useEffect(() => {
@@ -49,10 +49,7 @@ function useActiveSection(ids: string[]) {
   return active;
 }
 
-const SECTION_IDS = NAV_LINKS.map((link) => link.id);
-
 export function Navbar() {
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const active = useActiveSection(SECTION_IDS);
 
@@ -63,9 +60,9 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Di puncak halaman bar melayang bening di atas foto hero yang gelap —
-     seperti pada rujukan. Begitu digulir ia jadi pita krem pekat, karena
-     sisa halaman berlatar terang. */
+  /* Di puncak halaman bar melayang bening di atas foto hero yang gelap.
+     Begitu digulir ia jadi pita krem pekat, karena sisa halaman berlatar
+     terang. */
   const solid = scrolled;
 
   return (
@@ -78,19 +75,20 @@ export function Navbar() {
       ].join(" ")}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-10">
-        {/* Merek */}
-        <Link href="#beranda" className="group flex items-center gap-3">
+        {/* Merek. Ukurannya dikecilkan di ponsel: pada 390px versi lama
+            memakan hampir separuh lebar bar. */}
+        <Link href="#beranda" className="group flex items-center gap-2.5 md:gap-3">
           <Image
             src="/images/logo.png"
             alt=""
             width={44}
             height={44}
-            className="rounded-full ring-1 ring-taupe/70 transition-transform duration-300 group-hover:scale-105"
+            className="h-9 w-9 rounded-full ring-1 ring-taupe/70 transition-transform duration-300 group-hover:scale-105 md:h-11 md:w-11"
           />
           <span className="flex flex-col leading-none">
             <span
               className={[
-                "text-headline-sm transition-colors duration-300",
+                "font-display text-[15px] font-medium tracking-[0.04em] uppercase transition-colors duration-300 md:text-xl",
                 solid ? "text-charcoal" : "text-cream-light",
               ].join(" ")}
             >
@@ -98,7 +96,7 @@ export function Navbar() {
             </span>
             <span
               className={[
-                "text-label-caps mt-1 text-[8.5px] transition-colors duration-300",
+                "text-label-caps mt-1 text-[7px] transition-colors duration-300 md:text-[8.5px]",
                 solid ? "text-gold" : "text-gold-light",
               ].join(" ")}
             >
@@ -141,13 +139,12 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Aksi */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <Link
             href={WA_RESERVASI}
             target="_blank"
             rel="noopener noreferrer"
-className={[
+            className={[
               "text-label-caps hidden items-center rounded-md px-6 py-3 text-[10px] transition-colors duration-200 active:scale-95 sm:inline-flex",
               solid
                 ? "bg-charcoal text-cream-light hover:bg-coffee"
@@ -157,62 +154,7 @@ className={[
             Pesan Meja
           </Link>
 
-          {/* Menu layar sempit */}
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={solid ? "text-charcoal lg:hidden" : "text-cream-light lg:hidden"}
-                  aria-label="Buka menu navigasi"
-                />
-              }
-            >
-              <MenuIcon strokeWidth={1.5} />
-            </SheetTrigger>
-            <SheetContent side="right" className="w-80 border-taupe bg-cream-light">
-              <SheetTitle className="sr-only">Menu navigasi</SheetTitle>
-
-              <div className="mt-8 flex flex-col gap-1">
-                <div className="mb-8 flex items-center gap-3 px-2">
-                  <Image
-                    src="/images/logo.png"
-                    alt=""
-                    width={40}
-                    height={40}
-                    className="rounded-full ring-1 ring-taupe/70"
-                  />
-                  <span className="flex flex-col leading-none">
-                    <span className="text-headline-sm text-charcoal">{SITE.name}</span>
-                    <span className="text-label-caps mt-1 text-[8.5px] text-gold">
-                      {SITE.eyebrow}
-                    </span>
-                  </span>
-                </div>
-
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="text-serif-md rounded-lg px-4 py-3 text-charcoal/80 transition-colors hover:bg-taupe/25 hover:text-charcoal"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-
-                <Link
-                  href={WA_RESERVASI}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-label-caps mx-4 mt-6 inline-flex items-center justify-center rounded-md bg-charcoal px-6 py-3.5 text-[10px] text-cream-light transition-colors duration-200 hover:bg-coffee"
-                >
-                  Pesan Meja
-                </Link>
-              </div>
-            </SheetContent>
-          </Sheet>
+          <MobileNav links={NAV_LINKS} activeId={active} onDark={!solid} />
         </div>
       </div>
     </header>
