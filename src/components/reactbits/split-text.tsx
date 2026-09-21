@@ -11,7 +11,7 @@
  */
 
 import { motion, useReducedMotion } from "motion/react";
-import type { ElementType } from "react";
+import { Fragment, type ElementType } from "react";
 
 interface SplitTextProps {
   text: string;
@@ -20,6 +20,11 @@ interface SplitTextProps {
   delay?: number;
   duration?: number;
   splitType?: "chars" | "words";
+  /**
+   * Pemenggalan baris yang dipaksa. Tanpa ini baris jatuh mengikuti lebar
+   * wadah, sehingga slogan tiga kalimat bisa terpecah di tempat yang salah.
+   */
+  lines?: string[];
   from?: { opacity?: number; y?: number };
   to?: { opacity?: number; y?: number };
   threshold?: number;
@@ -32,15 +37,26 @@ export default function SplitText({
   delay = 30,
   duration = 0.7,
   splitType = "chars",
+  lines,
   from = { opacity: 0, y: 28 },
   to = { opacity: 1, y: 0 },
   threshold = 0.2,
   tag: Tag = "div",
 }: SplitTextProps) {
   const reduceMotion = useReducedMotion();
-  const words = text.split(" ");
+  const rows = lines ?? [text];
 
-  if (reduceMotion) return <Tag className={className}>{text}</Tag>;
+  if (reduceMotion) {
+    return (
+      <Tag className={className}>
+        {rows.map((row, i) => (
+          <span key={i} className="block">
+            {row}
+          </span>
+        ))}
+      </Tag>
+    );
+  }
 
   let index = -1;
 
@@ -49,35 +65,54 @@ export default function SplitText({
       {/* Teks utuh untuk pembaca layar; potongannya disembunyikan darinya. */}
       <span className="sr-only">{text}</span>
       <span aria-hidden="true">
+        {rows.map((row, r) => (
+          <span key={r} className="block">
+            {renderRow(row)}
+          </span>
+        ))}
+      </span>
+    </Tag>
+  );
+
+  function renderRow(row: string) {
+    const words = row.split(" ");
+    return (
+      <>
         {words.map((word, w) => {
           const pieces = splitType === "words" ? [word] : Array.from(word);
 
           return (
-            <span key={w} className="inline-block whitespace-nowrap">
-              {pieces.map((piece, p) => {
-                index += 1;
-                return (
-                  <motion.span
-                    key={p}
-                    className="inline-block will-change-transform"
-                    initial={from}
-                    whileInView={to}
-                    viewport={{ once: true, amount: threshold }}
-                    transition={{
-                      duration,
-                      delay: (index * delay) / 1000,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                  >
-                    {piece}
-                  </motion.span>
-                );
-              })}
-              {w < words.length - 1 && <span className="inline-block">&nbsp;</span>}
-            </span>
+            <Fragment key={w}>
+              <span className="inline-block whitespace-nowrap">
+                {pieces.map((piece, p) => {
+                  index += 1;
+                  return (
+                    <motion.span
+                      key={p}
+                      className="inline-block will-change-transform"
+                      initial={from}
+                      whileInView={to}
+                      viewport={{ once: true, amount: threshold }}
+                      transition={{
+                        duration,
+                        delay: (index * delay) / 1000,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    >
+                      {piece}
+                    </motion.span>
+                  );
+                })}
+              </span>
+              {/* Spasi harus jadi saudara antar kata, bukan anak terakhir di
+                  dalam span kata: spasi di ujung sebuah inline-block diciutkan
+                  jadi nol lebar, sehingga kata-kata menempel. Sebagai saudara,
+                  spasi ini juga memberi titik putus baris yang wajar. */}
+              {w < words.length - 1 ? " " : null}
+            </Fragment>
           );
         })}
-      </span>
-    </Tag>
-  );
+      </>
+    );
+  }
 }

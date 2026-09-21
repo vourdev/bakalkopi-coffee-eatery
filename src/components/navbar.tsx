@@ -63,13 +63,18 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* Di puncak halaman bar melayang bening di atas foto hero yang gelap —
+     seperti pada rujukan. Begitu digulir ia jadi pita krem pekat, karena
+     sisa halaman berlatar terang. */
+  const solid = scrolled;
+
   return (
     <header
       className={[
         "sticky top-0 z-50 w-full transition-all duration-300",
-        scrolled
+        solid
           ? "border-b border-taupe/50 bg-cream-light/92 shadow-[0_1px_20px_-8px_rgba(35,28,24,0.25)] backdrop-blur-md"
-          : "border-b border-transparent bg-cream-light/70 backdrop-blur-sm",
+          : "border-b border-transparent bg-transparent",
       ].join(" ")}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-10">
@@ -83,8 +88,20 @@ export function Navbar() {
             className="rounded-full ring-1 ring-taupe/70 transition-transform duration-300 group-hover:scale-105"
           />
           <span className="flex flex-col leading-none">
-            <span className="text-headline-sm text-charcoal">{SITE.name}</span>
-            <span className="text-label-caps mt-1 text-[8.5px] text-gold">
+            <span
+              className={[
+                "text-headline-sm transition-colors duration-300",
+                solid ? "text-charcoal" : "text-cream-light",
+              ].join(" ")}
+            >
+              {SITE.name}
+            </span>
+            <span
+              className={[
+                "text-label-caps mt-1 text-[8.5px] transition-colors duration-300",
+                solid ? "text-gold" : "text-gold-light",
+              ].join(" ")}
+            >
               {SITE.eyebrow}
             </span>
           </span>
@@ -101,14 +118,21 @@ export function Navbar() {
                 aria-current={isActive ? "true" : undefined}
                 className={[
                   "text-label-caps relative py-1 text-[10px] transition-colors duration-200",
-                  isActive ? "text-charcoal" : "text-charcoal/55 hover:text-charcoal",
+                  solid
+                    ? isActive
+                      ? "text-charcoal"
+                      : "text-charcoal/55 hover:text-charcoal"
+                    : isActive
+                      ? "text-cream-light"
+                      : "text-cream-light/65 hover:text-cream-light",
                 ].join(" ")}
               >
                 {link.label}
                 <span
                   aria-hidden="true"
                   className={[
-                    "absolute -bottom-0.5 left-0 h-px bg-gold transition-all duration-300",
+                    "absolute -bottom-0.5 left-0 h-px transition-all duration-300",
+                    solid ? "bg-gold" : "bg-gold-light",
                     isActive ? "w-full opacity-100" : "w-0 opacity-0",
                   ].join(" ")}
                 />
@@ -123,7 +147,12 @@ export function Navbar() {
             href={WA_RESERVASI}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-label-caps hidden items-center rounded-full bg-charcoal px-6 py-3 text-[10px] text-cream-light transition-colors duration-200 hover:bg-coffee active:scale-95 sm:inline-flex"
+className={[
+              "text-label-caps hidden items-center rounded-md px-6 py-3 text-[10px] transition-colors duration-200 active:scale-95 sm:inline-flex",
+              solid
+                ? "bg-charcoal text-cream-light hover:bg-coffee"
+                : "border border-cream-light/45 text-cream-light hover:border-gold hover:bg-gold/15",
+            ].join(" ")}
           >
             Pesan Meja
           </Link>
@@ -135,7 +164,7 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-charcoal lg:hidden"
+                  className={solid ? "text-charcoal lg:hidden" : "text-cream-light lg:hidden"}
                   aria-label="Buka menu navigasi"
                 />
               }
@@ -177,7 +206,7 @@ export function Navbar() {
                   href={WA_RESERVASI}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-label-caps mx-4 mt-6 inline-flex items-center justify-center rounded-full bg-charcoal px-6 py-3.5 text-[10px] text-cream-light transition-colors duration-200 hover:bg-coffee"
+                  className="text-label-caps mx-4 mt-6 inline-flex items-center justify-center rounded-md bg-charcoal px-6 py-3.5 text-[10px] text-cream-light transition-colors duration-200 hover:bg-coffee"
                 >
                   Pesan Meja
                 </Link>

@@ -1,11 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import AnimatedContent from "@/components/reactbits/animated-content";
-import CircularText from "@/components/reactbits/circular-text";
 import CountUp from "@/components/reactbits/count-up";
+import { StoryVideo } from "@/components/story-video";
 import { LeafMark, Ornament } from "@/components/ornament";
-import { SITE } from "@/lib/site";
 
 const STATS = [
   { value: 100, suffix: "%", label: "Biji kopi dari petani lokal" },
@@ -72,22 +69,19 @@ export function Story() {
             </AnimatedContent>
           </div>
 
-          {/* Kanan — foto mural dengan lencana melingkar */}
+          {/* Kanan — video cerita dengan tombol putar di tengahnya */}
           <AnimatedContent className="lg:col-span-7" delay={0.2} distance={36}>
             <div className="relative pb-10 lg:pl-8">
-              <div className="overflow-hidden rounded-[2rem] border border-taupe shadow-xl">
-                <Image
-                  src="/images/room-4.jpg"
-                  alt="Ruang dalam BAKALKOPI dengan mural proses kopi dan meja kayu"
-                  width={1280}
-                  height={900}
-                  sizes="(min-width: 1024px) 40rem, 100vw"
-                  className="h-[340px] w-full object-cover transition-transform duration-700 hover:scale-[1.03] md:h-[470px]"
-                />
-              </div>
+              <StoryVideo
+                src="/video/video-1.mp4"
+                poster="/images/room-4.jpg"
+                alt="Ruang dalam BAKALKOPI dengan mural proses kopi dan meja kayu"
+                label="Putar video cerita BAKALKOPI"
+              />
 
-              {/* Kartu kecil bertumpuk */}
-              <div className="absolute -bottom-2 left-0 w-52 rounded-2xl border border-gold/25 bg-white p-3 shadow-2xl sm:left-6 sm:w-60">
+              {/* Kartu kecil bertumpuk. Disembunyikan di bawah sm: di lebar
+                  ponsel kartunya jatuh tepat di atas tombol putar video. */}
+              <div className="absolute -bottom-2 left-0 hidden w-52 rounded-2xl border border-gold/25 bg-white p-3 shadow-2xl sm:left-6 sm:block sm:w-60">
                 <div className="h-32 overflow-hidden rounded-xl">
                   <Image
                     src="/images/quotes-background.jpg"
@@ -106,33 +100,6 @@ export function Story() {
                 </div>
               </div>
 
-              {/* Lencana melingkar menuju Instagram */}
-              <Link
-                href={SITE.contact.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Lihat keseharian BAKALKOPI di Instagram @${SITE.contact.instagram}`}
-                className="group absolute -top-6 right-2 grid h-36 w-36 place-items-center rounded-full border border-gold/30 bg-coffee text-cream-light shadow-xl transition-colors duration-300 hover:bg-charcoal md:right-6"
-              >
-                {/* Tanpa kelas label: tracking 0.22em menggeser tiap glif keluar
-                    dari pusat spannya dan membuat lingkaran terlihat berdesakan.
-                    Pembungkus absolut memusatkan cincin teks terhadap lencana. */}
-                <span className="pointer-events-none absolute inset-0 grid place-items-center">
-                  <CircularText
-                    text="· INSTAGRAM · BAKALKOPI.ID "
-                    size={132}
-                    spinDuration={26}
-                    onHover="speedUp"
-                    className="font-sans text-[10px] font-semibold text-cream-light/70 uppercase"
-                  />
-                </span>
-                <span className="relative grid h-12 w-12 place-items-center rounded-full bg-gold/25 ring-1 ring-gold/30">
-                  <ArrowUpRight
-                    className="h-5 w-5 text-amber-soft transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    strokeWidth={1.5}
-                  />
-                </span>
-              </Link>
 
               <Ornament className="mt-8 flex justify-center text-gold lg:hidden" />
             </div>

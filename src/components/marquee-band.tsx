@@ -8,10 +8,14 @@ import { Fragment } from "react";
 export function MarqueeBand({ items }: { items: string[] }) {
   const run = [...items, ...items];
 
+  // Tanpa border. Pita ini duduk persis di bawah tepi sobek, dan garis rambut
+  // terang di situ terbaca sebagai border yang tidak disengaja di dekat
+  // gelombang. Pemisahnya sudah dikerjakan tepi sobek di atas dan pergantian
+  // warna di bawah.
   return (
     <div
       aria-hidden="true"
-      className="w-full overflow-hidden border-y border-cream-light/10 bg-charcoal py-3.5 select-none"
+      className="w-full overflow-hidden bg-charcoal py-4 select-none"
     >
       <div className="animate-marquee flex w-max items-center gap-8 md:gap-12">
         {run.map((item, i) => (

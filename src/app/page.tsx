@@ -13,7 +13,7 @@ import { Footer } from "@/components/footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-background selection:bg-gold/25 selection:text-charcoal">
+    <div className="flex min-h-screen flex-col bg-background">
       <Navbar />
       <main className="flex-1">
         {/* Terang */}

@@ -18,9 +18,9 @@ const FRAMES = [
     height: "h-64 md:h-[420px]",
   },
   {
-    src: "/images/menu-4.jpg",
-    alt: "Hidangan panas disajikan di atas hot plate kayu bersama kuah hangat",
-    label: "03 / Dari Dapur",
+    src: "/images/menu-12.jpg",
+    alt: "Gorengan pisang bersaus karamel dengan sekop es krim vanila dan es teh mangga",
+    label: "03 / Manis Penutup",
     span: "md:col-span-5",
     height: "h-64 md:h-[360px]",
   },

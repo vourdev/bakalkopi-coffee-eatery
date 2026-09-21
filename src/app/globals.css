@@ -126,6 +126,17 @@
   }
 }
 
+/* Seleksi teks. Emas pekat dengan teks arang terbaca di latar terang maupun
+   gelap; emas transparan sebelumnya membuat teks di pita arang nyaris hilang. */
+::selection {
+  background-color: #c79a5e;
+  color: #231c18;
+}
+::-moz-selection {
+  background-color: #c79a5e;
+  color: #231c18;
+}
+
 /* ===== Skala tipografi =====
    Display selalu huruf kapital dengan tracking positif — kapital butuh
    ruang ekstra, bukan tracking negatif seperti pada teks huruf kecil. */
@@ -212,6 +223,36 @@
 .tabular {
   font-variant-numeric: tabular-nums;
 }
+
+/* ===== Hero satu layar =====
+   Ukurannya ikut tinggi viewport, bukan hanya lebarnya. Skala biasa hanya
+   membaca vw, jadi pada layar pendek-tapi-lebar isi hero meluber melewati
+   satu layar. Paragraf pengantar disembunyikan di layar sangat pendek —
+   isinya diulang di bagian Cerita tepat di bawahnya. */
+.hero-display {
+  font-family: var(--font-display);
+  /* Batas atas 3.75rem: kolom naskah hero kini selebar max-w-2xl (672px),
+     cukup untuk menahan "GOOD MOMENTS." pada satu baris di ukuran itu. */
+  font-size: clamp(1.75rem, min(5.2vw, 7svh), 3.75rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+}
+.hero-lead {
+  font-family: var(--font-body);
+  font-size: clamp(0.875rem, 1.85svh, 1.0625rem);
+  font-weight: 400;
+  line-height: 1.6;
+}
+/* Layar sangat pendek: bagian pelengkap hero disembunyikan supaya isi
+   utamanya tetap muat satu layar tanpa mengecilkan tipografi. */
+@media (max-height: 780px) {
+  .hero-collapsible {
+    display: none;
+  }
+}
+
 
 /* ===== Gerak =====
    Satu-satunya animasi CSS yang tersisa; sisanya ditangani `motion`. */

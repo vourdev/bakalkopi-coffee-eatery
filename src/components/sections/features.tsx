@@ -1,6 +1,5 @@
 import { Armchair, Coffee, Heart, Leaf } from "lucide-react";
 import AnimatedContent from "@/components/reactbits/animated-content";
-import { TornEdge } from "@/components/torn-edge";
 
 const FEATURES = [
   {
@@ -25,38 +24,39 @@ const FEATURES = [
   },
 ];
 
+/**
+ * Pita fasilitas. Latarnya terang, bukan arang seperti sebelumnya: hero kini
+ * berupa foto gelap penuh, dan tepi sobek di kakinya perlu bidang terang di
+ * bawah agar peralihannya terlihat.
+ */
 export function Features() {
   return (
-    <section className="-mt-px bg-charcoal pt-14 pb-0 md:pt-16">
+    <section className="-mt-px bg-cream-light py-12 md:py-14">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
-        {/* Garis rambut vertikal antar kolom, seperti pada rujukan desain */}
-        <div className="grid grid-cols-2 gap-y-12 lg:grid-cols-4 lg:gap-y-0">
+        <div className="grid grid-cols-1 gap-y-9 sm:grid-cols-2 lg:grid-cols-4 lg:gap-y-0">
           {FEATURES.map(({ Icon, title, desc }, i) => (
             <AnimatedContent
               key={title}
               delay={i * 0.08}
-              distance={28}
+              distance={26}
               className={[
-                "flex flex-col items-center px-4 text-center",
+                "flex items-start gap-4 sm:px-5 lg:px-6",
                 // Pemisah hanya di antara kolom, bukan di tepi baris
-                i % 2 === 1 ? "border-l border-cream-light/12" : "",
-                "lg:border-l lg:first:border-l-0",
+                i % 2 === 1 ? "sm:border-l sm:border-taupe" : "",
+                "lg:border-l lg:border-taupe lg:first:border-l-0",
               ].join(" ")}
             >
-              <Icon className="h-8 w-8 text-gold" strokeWidth={1} />
-              <h3 className="text-label-caps mt-5 text-[10.5px] text-cream-light">
-                {title}
-              </h3>
-              <p className="text-body-sm mt-2.5 max-w-[15rem] text-cream-light/45">
-                {desc}
-              </p>
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-taupe bg-cream">
+                <Icon className="h-5 w-5 text-coffee" strokeWidth={1.25} />
+              </span>
+              <div>
+                <h3 className="text-label-caps text-[10.5px] text-charcoal">{title}</h3>
+                <p className="text-body-sm mt-2 max-w-[15rem] text-charcoal/50">{desc}</p>
+              </div>
             </AnimatedContent>
           ))}
         </div>
       </div>
-
-      {/* Peralihan kembali ke pita krem */}
-      <TornEdge color="#f1eade" className="mt-14 md:mt-16" />
     </section>
   );
 }

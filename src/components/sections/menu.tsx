@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Tabs } from "@base-ui/react/tabs";
 import { SectionHeading } from "@/components/section-heading";
 import AnimatedContent from "@/components/reactbits/animated-content";
@@ -9,6 +10,11 @@ import { TornEdge } from "@/components/torn-edge";
 const MENU_DATA = {
   nusantara: {
     label: "Nusantara",
+    note: "Nasi bakar daun pisang, rawon, dan lauk rumahan yang dimasak harian.",
+    cover: {
+      src: "/images/menu-7.jpg",
+      alt: "Nasi goreng merah dengan telur ceplok renyah dan irisan timun",
+    },
     items: [
       { name: "Nasi Bakar Ayam Jamur", price: "36", desc: "Ayam, jamur, dan telur suwir dalam nasi gurih, dibungkus daun pisang lalu dibakar, termasuk kerupuk", tag: "Andalan" },
       { name: "Nasi Bakar Cumi", price: "40", desc: "Cumi pedas dan telur suwir dalam nasi gurih, dibungkus daun pisang lalu dibakar", tag: null },
@@ -23,6 +29,8 @@ const MENU_DATA = {
   },
   kopi: {
     label: "Kopi",
+    note: "Single origin Nusantara, diseduh manual maupun dengan mesin.",
+    cover: null,
     items: [
       { name: "Es Bakalkopi", price: "29", desc: "Racikan espresso rumahan, susu segar dingin, dan gula aren organik", tag: "Favorit" },
       { name: "Latte", price: "29", desc: "Espresso klasik dengan susu segar yang di-steam", tag: null },
@@ -39,6 +47,11 @@ const MENU_DATA = {
   },
   pasta: {
     label: "Pasta & Nasi",
+    note: "Pasta dan nasi goreng, diantar panas langsung dari wajan.",
+    cover: {
+      src: "/images/menu-4.jpg",
+      alt: "Mie panas di atas hot plate kayu dengan sayur hijau dan semangkuk kuah",
+    },
     items: [
       { name: "Spaghetti Alfredo", price: "41", desc: "Saus alfredo krim dengan pasta al dente", tag: null },
       { name: "Spaghetti Aglio Fish Bakal", price: "41", desc: "Pasta minyak bawang dengan ikan segar", tag: "Andalan" },
@@ -50,6 +63,11 @@ const MENU_DATA = {
   },
   ricebowl: {
     label: "Ricebowl & Katsu",
+    note: "Semangkuk nasi dengan lauk bersaus — cepat dan mengenyangkan.",
+    cover: {
+      src: "/images/menu-6.jpg",
+      alt: "Ricebowl dalam mangkuk kuning dengan daging bersaus pekat dan acar wortel",
+    },
     items: [
       { name: "Chicken Katsu", price: "45", desc: "Fillet ayam berbalut panko, renyah di luar", tag: "Favorit" },
       { name: "Chicken Curry", price: "36", desc: "Ayam empuk dalam saus kari beraroma", tag: null },
@@ -61,6 +79,11 @@ const MENU_DATA = {
   },
   nonkopi: {
     label: "Non-Kopi",
+    note: "Cokelat, matcha, yoghurt, dan teh untuk yang sedang tidak ingin kopi.",
+    cover: {
+      src: "/images/menu-10.jpg",
+      alt: "Minuman cokelat dingin dalam gelas tinggi dengan serutan cokelat",
+    },
     items: [
       { name: "Dark Chocolate", price: "30", desc: "Cokelat hitam pekat dan lembut", tag: null },
       { name: "Matcha Latte", price: "27", desc: "Matcha Jepang premium dengan susu segar", tag: "Favorit" },
@@ -76,6 +99,11 @@ const MENU_DATA = {
   },
   camilan: {
     label: "Camilan",
+    note: "Teman ngobrol: gorengan, platter berbagi, dan yang manis-manis.",
+    cover: {
+      src: "/images/menu-11.jpg",
+      alt: "Tiga mini burger berisi ayam suwir berbumbu di atas piring keramik",
+    },
     items: [
       { name: "Chicken Spring Roll", price: "31", desc: "Lumpia goreng isi ayam, renyah", tag: null },
       { name: "Gyoza Chicken", price: "31", desc: "Pangsit Jepang panggang wajan", tag: null },
@@ -111,7 +139,10 @@ export function Menu() {
               <Tabs.Tab
                 key={key}
                 value={key}
-                className="text-label-caps shrink-0 cursor-pointer rounded-full border border-taupe bg-cream-light px-5 py-3 text-[9.5px] whitespace-nowrap text-charcoal/60 transition-colors duration-200 outline-none select-none hover:border-charcoal/40 hover:text-charcoal focus-visible:ring-2 focus-visible:ring-gold/60 data-active:border-charcoal data-active:bg-charcoal data-active:text-cream-light"
+                /* Hover dibatasi ke tab non-aktif: `hover:text-charcoal`
+                   tanpa batas itu membuat tab aktif jadi arang di atas
+                   arang, sehingga labelnya hilang saat disentuh kursor. */
+                className="text-label-caps shrink-0 cursor-pointer rounded-full border border-taupe bg-cream-light px-5 py-3 text-[9.5px] whitespace-nowrap text-charcoal/60 transition-colors duration-200 outline-none select-none hover:not-data-active:border-charcoal/40 hover:not-data-active:text-charcoal focus-visible:ring-2 focus-visible:ring-gold/60 data-active:border-charcoal data-active:bg-charcoal data-active:text-cream-light data-active:hover:border-coffee data-active:hover:bg-coffee"
               >
                 {category.label}
               </Tabs.Tab>
@@ -120,6 +151,33 @@ export function Menu() {
 
           {Object.entries(MENU_DATA).map(([key, category]) => (
             <Tabs.Panel key={key} value={key}>
+              {/* Pengantar kategori. Foto bersifat mewakili golongan masakan,
+                  bukan mengklaim satu nama hidangan tertentu — sebagian foto
+                  belum terkonfirmasi namanya. Kategori tanpa foto tetap
+                  menampilkan keterangannya. */}
+              <AnimatedContent distance={24} duration={0.6}>
+                <div className="mb-9 flex items-center gap-5 border-b border-taupe pb-8 sm:gap-7">
+                  {category.cover && (
+                    <Image
+                      src={category.cover.src}
+                      alt={category.cover.alt}
+                      width={480}
+                      height={480}
+                      sizes="9rem"
+                      className="aspect-square w-24 shrink-0 rounded-2xl object-cover sm:w-32 lg:w-36"
+                    />
+                  )}
+                  <div>
+                    <p className="text-label-caps text-[9px] text-gold">
+                      Dari dapur · {category.label}
+                    </p>
+                    <p className="text-body-md mt-2 max-w-md text-charcoal/55">
+                      {category.note}
+                    </p>
+                  </div>
+                </div>
+              </AnimatedContent>
+
               <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {category.items.map((item, i) => (
                   <li key={item.name} className="h-full">
