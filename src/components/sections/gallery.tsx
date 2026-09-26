@@ -68,7 +68,7 @@ export function Gallery() {
                   className={`w-full ${frame.height} object-cover transition-transform duration-700 group-hover:scale-105`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/5 to-transparent" />
-                <figcaption className="text-label-caps absolute inset-x-6 bottom-5 text-[9px] text-cream-light/85">
+                <figcaption className="text-label-caps absolute inset-x-6 bottom-5 text-cream-light/85">
                   {frame.label}
                 </figcaption>
               </figure>

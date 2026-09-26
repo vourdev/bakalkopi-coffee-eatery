@@ -70,13 +70,13 @@ export function Experience() {
                       jatuh di bagian gambar yang terang dan nyaris tak terbaca. */}
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
                 <figcaption className="absolute inset-x-6 bottom-6">
-                  <span className="text-label-caps rounded-full bg-charcoal/65 px-3 py-1.5 text-[8.5px] text-amber-soft backdrop-blur-sm">
+                  <span className="text-label-caps rounded-full bg-charcoal/65 px-3 py-1.5 text-amber-soft backdrop-blur-sm">
                     Setiap Akhir Pekan
                   </span>
                   <p className="text-headline-sm mt-3 text-cream-light">
                     Sesi Akustik Langsung
                   </p>
-                  <p className="text-body-sm mt-1.5 max-w-sm text-cream-light/55">
+                  <p className="text-body-sm mt-1.5 max-w-sm text-cream-light/70">
                     Jazz lembut dan indie akustik di bawah kanopi teras
                   </p>
                 </figcaption>
@@ -95,7 +95,7 @@ export function Experience() {
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/75 via-transparent to-transparent" />
-                  <figcaption className="text-label-caps absolute inset-x-5 bottom-5 flex flex-col items-start gap-1.5 rounded-xl border border-cream-light/10 bg-charcoal/65 px-4 py-3.5 text-[8.5px] text-cream-light/65 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+                  <figcaption className="text-label-caps absolute inset-x-5 bottom-5 flex flex-col items-start gap-1.5 rounded-xl border border-cream-light/10 bg-charcoal/65 px-4 py-3.5 text-cream-light/65 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:gap-3">
                     <span>Suasana Malam · 19.30</span>
                     <span className="text-amber-soft">Cahaya Hangat</span>
                   </figcaption>
@@ -107,10 +107,10 @@ export function Experience() {
                   <AnimatedContent key={title} delay={0.2 + i * 0.08} distance={24}>
                     <div className="h-full rounded-2xl border border-cream-light/10 bg-charcoal-light p-5">
                       <Icon className="h-6 w-6 text-gold" strokeWidth={1} />
-                      <p className="text-label-caps mt-4 text-[9.5px] text-cream-light">
+                      <p className="text-label-caps mt-4 text-cream-light">
                         {title}
                       </p>
-                      <p className="text-body-sm mt-2 text-cream-light/40">{desc}</p>
+                      <p className="text-body-sm mt-2 text-cream-light/70">{desc}</p>
                     </div>
                   </AnimatedContent>
                 ))}

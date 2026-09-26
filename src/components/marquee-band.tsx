@@ -20,7 +20,7 @@ export function MarqueeBand({ items }: { items: string[] }) {
       <div className="animate-marquee flex w-max items-center gap-8 md:gap-12">
         {run.map((item, i) => (
           <Fragment key={i}>
-            <span className="text-label-caps whitespace-nowrap text-cream-light/45">{item}</span>
+            <span className="text-label-caps whitespace-nowrap text-cream-light/70">{item}</span>
             <span className="h-1 w-1 shrink-0 rotate-45 bg-gold/60" />
           </Fragment>
         ))}

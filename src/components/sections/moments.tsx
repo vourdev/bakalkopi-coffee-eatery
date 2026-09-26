@@ -57,13 +57,13 @@ export function Moments() {
                 <article className="flex h-full flex-col justify-between rounded-2xl border border-taupe/70 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_34px_-14px_rgba(35,28,24,0.2)]">
                   <div>
                     <Icon className="h-6 w-6 text-coffee" strokeWidth={1} />
-                    <p className="text-label-caps tabular mt-4 text-[9px] text-gold">
+                    <p className="text-label-caps tabular mt-4 text-gold-deep">
                       {time}
                     </p>
                     <h3 className="text-serif-md mt-1.5 text-charcoal">{title}</h3>
-                    <p className="text-body-sm mt-2.5 text-charcoal/45">{desc}</p>
+                    <p className="text-body-sm mt-2.5 text-charcoal/70">{desc}</p>
                   </div>
-                  <p className="text-label-caps mt-6 border-t border-taupe/40 pt-3.5 text-[8.5px] text-charcoal/35">
+                  <p className="text-label-caps mt-6 border-t border-taupe/40 pt-3.5 text-charcoal/70">
                     {tag}
                   </p>
                 </article>

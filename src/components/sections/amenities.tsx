@@ -59,8 +59,8 @@ export function Amenities() {
                     strokeWidth={1}
                   />
                   <div>
-                    <h3 className="text-label-caps text-[10px] text-charcoal">{title}</h3>
-                    <p className="text-body-sm mt-2 text-charcoal/45">{desc}</p>
+                    <h3 className="text-label-caps text-charcoal">{title}</h3>
+                    <p className="text-body-sm mt-2 text-charcoal/70">{desc}</p>
                   </div>
                 </div>
               </AnimatedContent>

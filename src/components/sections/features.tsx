@@ -50,8 +50,8 @@ export function Features() {
                 <Icon className="h-5 w-5 text-coffee" strokeWidth={1.25} />
               </span>
               <div>
-                <h3 className="text-label-caps text-[10.5px] text-charcoal">{title}</h3>
-                <p className="text-body-sm mt-2 max-w-[15rem] text-charcoal/50">{desc}</p>
+                <h3 className="text-label-caps text-charcoal">{title}</h3>
+                <p className="text-body-sm mt-2 max-w-[15rem] text-charcoal/70">{desc}</p>
               </div>
             </AnimatedContent>
           ))}

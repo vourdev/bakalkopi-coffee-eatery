@@ -58,23 +58,23 @@ export function Footer() {
               />
               <span className="text-headline-sm text-cream-light">{SITE.name}</span>
             </div>
-            <p className="text-body-sm max-w-xs text-cream-light/50">
+            <p className="text-body-sm max-w-xs text-cream-light/70">
               Kafe dan rumah makan Nusantara di Cimanggis, Depok. Menikmati
               pelannya waktu lewat masakan rumahan dan kopi yang diseduh benar.
             </p>
-            <p className="text-label-caps pt-1 text-[9px] text-gold">{SITE.tagline}</p>
+            <p className="text-label-caps pt-1 text-gold">{SITE.tagline}</p>
           </div>
 
           {/* Jelajahi */}
           <nav className="flex flex-col gap-3" aria-label="Jelajahi halaman">
-            <h2 className="text-label-caps mb-1 text-[9.5px] text-cream-light">
+            <h2 className="text-label-caps mb-1 text-cream-light">
               Jelajahi
             </h2>
             {EXPLORE_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-body-sm text-cream-light/50 transition-colors duration-200 hover:text-cream-light"
+                className="text-body-sm text-cream-light/70 transition-colors duration-200 hover:text-cream-light"
               >
                 {link.label}
               </Link>
@@ -83,14 +83,14 @@ export function Footer() {
 
           {/* Komitmen */}
           <nav className="flex flex-col gap-3" aria-label="Komitmen kami">
-            <h2 className="text-label-caps mb-1 text-[9.5px] text-cream-light">
+            <h2 className="text-label-caps mb-1 text-cream-light">
               Komitmen
             </h2>
             {COMMITMENT_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-body-sm text-cream-light/50 transition-colors duration-200 hover:text-cream-light"
+                className="text-body-sm text-cream-light/70 transition-colors duration-200 hover:text-cream-light"
               >
                 {link.label}
               </Link>
@@ -99,14 +99,14 @@ export function Footer() {
 
           {/* Kontak */}
           <div className="flex flex-col gap-4">
-            <h2 className="text-label-caps text-[9.5px] text-cream-light">Kunjungi</h2>
+            <h2 className="text-label-caps text-cream-light">Kunjungi</h2>
 
-            <p className="text-body-sm flex items-start gap-2.5 text-cream-light/50">
+            <p className="text-body-sm flex items-start gap-2.5 text-cream-light/70">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} />
               <span>{ADDRESS_LINE}</span>
             </p>
 
-            <p className="text-body-sm flex items-start gap-2.5 text-cream-light/50">
+            <p className="text-body-sm flex items-start gap-2.5 text-cream-light/70">
               <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} />
               <span>
                 {SITE.hours.label}
@@ -119,7 +119,7 @@ export function Footer() {
               href={WA_TANYA}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-body-sm flex items-center gap-2.5 text-cream-light/50 transition-colors hover:text-cream-light"
+              className="text-body-sm flex items-center gap-2.5 text-cream-light/70 transition-colors hover:text-cream-light"
             >
               <Phone className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} />
               {SITE.contact.whatsappDisplay}
@@ -141,7 +141,7 @@ export function Footer() {
 
       <div className="flex flex-col items-center gap-4 py-8">
         <Ornament className="text-gold/50" />
-        <p className="text-body-sm px-5 text-center text-xs text-cream-light/35">
+        <p className="text-body-sm px-5 text-center text-cream-light/60">
           © {year} {SITE.legalName}. Seluruh hak cipta dilindungi.
         </p>
       </div>

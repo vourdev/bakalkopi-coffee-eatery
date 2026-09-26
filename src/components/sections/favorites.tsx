@@ -68,17 +68,17 @@ export function Favorites() {
                   className="aspect-4/5 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 {item.tag && (
-                  <span className="text-label-caps absolute top-3 left-3 rounded-full bg-cream-light/92 px-3 py-1.5 text-[8.5px] text-coffee backdrop-blur-sm">
+                  <span className="text-label-caps absolute top-3 left-3 rounded-full bg-cream-light/92 px-3 py-1.5 text-coffee backdrop-blur-sm">
                     {item.tag}
                   </span>
                 )}
               </div>
 
-              <h3 className="text-label-caps mt-5 text-[10.5px] text-charcoal">
+              <h3 className="text-label-caps mt-5 text-charcoal">
                 {item.name}
               </h3>
-              <p className="text-body-sm mt-2 text-charcoal/45">{item.desc}</p>
-              <p className="text-price-tag tabular mt-3 text-gold">
+              <p className="text-body-sm mt-2 text-charcoal/70">{item.desc}</p>
+              <p className="text-price-tag tabular mt-3 text-gold-deep">
                 {item.price}k
               </p>
             </AnimatedContent>

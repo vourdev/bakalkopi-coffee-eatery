@@ -35,7 +35,7 @@ export function Lokasi() {
               <div className="flex items-start gap-3 border-b border-cream-light/12 pb-7">
                 <MapPin className="mt-1 h-5 w-5 shrink-0 text-gold" strokeWidth={1.25} />
                 <div>
-                  <h3 className="text-label-caps text-[9.5px] text-cream-light">Alamat</h3>
+                  <h3 className="text-label-caps text-cream-light">Alamat</h3>
                   <address className="text-body-md mt-2 max-w-sm text-taupe/85 not-italic">
                     {ADDRESS_LINE}
                   </address>
@@ -48,12 +48,12 @@ export function Lokasi() {
                 <div className="flex items-start gap-3">
                   <Clock className="mt-1 h-5 w-5 shrink-0 text-gold" strokeWidth={1.25} />
                   <div>
-                    <h3 className="text-label-caps text-[9.5px] text-cream-light">
+                    <h3 className="text-label-caps text-cream-light">
                       Jam Buka
                     </h3>
                     <p className="text-body-md mt-2 text-taupe/85">{SITE.hours.label}</p>
                     <p className="text-headline-sm tabular mt-1 text-gold">{HOURS_LINE}</p>
-                    <span className="text-label-caps mt-3 inline-flex items-center gap-2 rounded-full border border-gold/35 px-3 py-1.5 text-[8.5px] text-gold">
+                    <span className="text-label-caps mt-3 inline-flex items-center gap-2 rounded-full border border-gold/35 px-3 py-1.5 text-gold">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                       Buka setiap hari
                     </span>
@@ -65,7 +65,7 @@ export function Lokasi() {
                 <div className="flex items-start gap-3">
                   <Phone className="mt-1 h-5 w-5 shrink-0 text-gold" strokeWidth={1.25} />
                   <div>
-                    <h3 className="text-label-caps text-[9.5px] text-cream-light">
+                    <h3 className="text-label-caps text-cream-light">
                       Reservasi &amp; Pesanan
                     </h3>
                     <p className="text-body-md mt-2 text-taupe/85">WhatsApp</p>
@@ -92,7 +92,7 @@ export function Lokasi() {
 
             <AnimatedContent delay={0.2} distance={22}>
               <div className="mt-7 rounded-xl border border-cream-light/12 bg-charcoal-light p-5">
-                <h3 className="text-label-caps flex items-center gap-2 text-[9.5px] text-gold">
+                <h3 className="text-label-caps flex items-center gap-2 text-gold">
                   <Info className="h-4 w-4" strokeWidth={1.25} />
                   Aturan Rumah
                 </h3>
@@ -156,7 +156,7 @@ export function Lokasi() {
                   setengah tinggi agar keterangan tetap terbaca. */}
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-transparent" />
               <div className="absolute inset-x-5 bottom-5">
-                <p className="text-label-caps text-[8.5px] text-gold">Ruang Bersama</p>
+                <p className="text-label-caps text-gold">Ruang Bersama</p>
                 <p className="text-serif-md mt-1.5 text-cream-light">
                   Parkiran luas, Wi-Fi kencang, dan sambutan yang hangat.
                 </p>

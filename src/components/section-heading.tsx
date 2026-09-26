@@ -37,7 +37,7 @@ export function SectionHeading({
       <span
         className={[
           "flex items-center gap-3 text-label-caps",
-          onDark ? "text-gold-light" : "text-gold",
+          onDark ? "text-gold-light" : "text-gold-deep",
         ].join(" ")}
       >
         {centered && <Ornament />}
@@ -59,7 +59,7 @@ export function SectionHeading({
         <p
           className={[
             "text-script mt-2 text-3xl md:text-4xl",
-            onDark ? "text-gold-light" : "text-gold",
+            onDark ? "text-gold-light" : "text-gold-deep",
           ].join(" ")}
         >
           {script}
@@ -70,7 +70,7 @@ export function SectionHeading({
         <p
           className={[
             "text-body-md mt-4 max-w-xl",
-            onDark ? "text-cream-light/55" : "text-charcoal/55",
+            onDark ? "text-cream-light/70" : "text-charcoal/70",
           ].join(" ")}
         >
           {description}

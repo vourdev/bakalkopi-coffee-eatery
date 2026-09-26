@@ -7,13 +7,35 @@ import { SectionHeading } from "@/components/section-heading";
 import AnimatedContent from "@/components/reactbits/animated-content";
 import { TornEdge } from "@/components/torn-edge";
 
-const MENU_DATA = {
+interface Photo {
+  src: string;
+  alt: string;
+}
+
+interface MenuItem {
+  name: string;
+  /** Dalam ribuan rupiah. */
+  price: string;
+  desc: string;
+  tag: string | null;
+  /** Hanya untuk hidangan yang fotonya sudah terkonfirmasi. */
+  photo?: Photo;
+}
+
+interface MenuCategory {
+  label: string;
+  note: string;
+  cover: Photo | null;
+  items: MenuItem[];
+}
+
+const MENU_DATA: Record<string, MenuCategory> = {
   nusantara: {
     label: "Nusantara",
     note: "Nasi bakar daun pisang, rawon, dan lauk rumahan yang dimasak harian.",
     cover: {
-      src: "/images/menu-7.jpg",
-      alt: "Nasi goreng merah dengan telur ceplok renyah dan irisan timun",
+      src: "/images/menu-3.jpg",
+      alt: "Nasi timbel dengan ayam rempah, tahu, tempe, dan lalapan segar",
     },
     items: [
       { name: "Nasi Bakar Ayam Jamur", price: "36", desc: "Ayam, jamur, dan telur suwir dalam nasi gurih, dibungkus daun pisang lalu dibakar, termasuk kerupuk", tag: "Andalan" },
@@ -49,12 +71,12 @@ const MENU_DATA = {
     label: "Pasta & Nasi",
     note: "Pasta dan nasi goreng, diantar panas langsung dari wajan.",
     cover: {
-      src: "/images/menu-4.jpg",
-      alt: "Mie panas di atas hot plate kayu dengan sayur hijau dan semangkuk kuah",
+      src: "/images/menu-7.jpg",
+      alt: "Nasi goreng merah dengan telur dadar renyah di atasnya",
     },
     items: [
-      { name: "Spaghetti Alfredo", price: "41", desc: "Saus alfredo krim dengan pasta al dente", tag: null },
-      { name: "Spaghetti Aglio Fish Bakal", price: "41", desc: "Pasta minyak bawang dengan ikan segar", tag: "Andalan" },
+      { name: "Spaghetti Alfredo", price: "41", desc: "Saus alfredo krim dengan pasta al dente", tag: null, photo: { src: "/images/menu-1.jpg", alt: "Spaghetti alfredo bersaus krim dalam mangkuk keramik" } },
+      { name: "Spaghetti Aglio Fish Bakal", price: "41", desc: "Pasta minyak bawang dengan ikan asap dan cabai", tag: "Andalan", photo: { src: "/images/menu-18.jpg", alt: "Spaghetti aglio olio dengan suwiran ikan asap dan irisan cabai merah" } },
       { name: "Spaghetti Katsu Matah", price: "44", desc: "Ayam katsu, sambal matah, dan pasta", tag: null },
       { name: "Nasi Goreng Smokey", price: "40", desc: "Nasi goreng smokey dengan bumbu rempah", tag: null },
       { name: "Nasi Goreng Petei", price: "42", desc: "Nasi goreng dengan petai", tag: null },
@@ -65,11 +87,11 @@ const MENU_DATA = {
     label: "Ricebowl & Katsu",
     note: "Semangkuk nasi dengan lauk bersaus — cepat dan mengenyangkan.",
     cover: {
-      src: "/images/menu-6.jpg",
-      alt: "Ricebowl dalam mangkuk kuning dengan daging bersaus pekat dan acar wortel",
+      src: "/images/menu-13.jpg",
+      alt: "Ricebowl dengan telur orak-arik, daging suwir berbumbu, dan slaw pedas",
     },
     items: [
-      { name: "Chicken Katsu", price: "45", desc: "Fillet ayam berbalut panko, renyah di luar", tag: "Favorit" },
+      { name: "Chicken Katsu", price: "45", desc: "Fillet ayam berbalut panko, renyah di luar", tag: "Favorit", photo: { src: "/images/menu-15.jpg", alt: "Ricebowl chicken katsu bersaus, ditabur daun bawang dan wijen" } },
       { name: "Chicken Curry", price: "36", desc: "Ayam empuk dalam saus kari beraroma", tag: null },
       { name: "Fish Bakal", price: "42", desc: "Fillet ikan segar dengan saus andalan", tag: null },
       { name: "Chicken Matah", price: "45", desc: "Ayam panggang dengan sambal matah", tag: null },
@@ -86,7 +108,7 @@ const MENU_DATA = {
     },
     items: [
       { name: "Dark Chocolate", price: "30", desc: "Cokelat hitam pekat dan lembut", tag: null },
-      { name: "Matcha Latte", price: "27", desc: "Matcha Jepang premium dengan susu segar", tag: "Favorit" },
+      { name: "Matcha Latte", price: "27", desc: "Matcha Jepang premium dengan susu segar", tag: "Favorit", photo: { src: "/images/menu-5.jpg", alt: "Es matcha latte hijau dalam gelas tinggi" } },
       { name: "Taro Latte", price: "26", desc: "Talas lembut dengan susu steam", tag: null },
       { name: "Red Velvet", price: "24", desc: "Minuman susu red velvet", tag: null },
       { name: "Mango Yoghurt", price: "31", desc: "Mangga segar diblender dengan yoghurt", tag: null },
@@ -101,18 +123,18 @@ const MENU_DATA = {
     label: "Camilan",
     note: "Teman ngobrol: gorengan, platter berbagi, dan yang manis-manis.",
     cover: {
-      src: "/images/menu-11.jpg",
-      alt: "Tiga mini burger berisi ayam suwir berbumbu di atas piring keramik",
+      src: "/images/menu-17.jpg",
+      alt: "Sepiring pisang goreng karamel bertabur wijen hitam",
     },
     items: [
       { name: "Chicken Spring Roll", price: "31", desc: "Lumpia goreng isi ayam, renyah", tag: null },
       { name: "Gyoza Chicken", price: "31", desc: "Pangsit Jepang panggang wajan", tag: null },
-      { name: "Katsu Bites", price: "31", desc: "Potongan katsu renyah seukuran gigitan", tag: "Favorit" },
+      { name: "Katsu Bites", price: "31", desc: "Potongan katsu renyah seukuran gigitan", tag: "Favorit", photo: { src: "/images/menu-2.jpg", alt: "Katsu bites renyah dalam keranjang rotan dengan saus tomat" } },
       { name: "French Fries", price: "25", desc: "Kentang goreng renyah keemasan", tag: null },
       { name: "Snack Platter", price: "50", desc: "Aneka camilan untuk berbagi", tag: null },
       { name: "Sandwich Platter", price: "50", desc: "Aneka sandwich untuk berbagi", tag: null },
-      { name: "Choco Brownie", price: "28", desc: "Brownies cokelat pekat", tag: null },
-      { name: "Mini Burger", price: "28", desc: "Burger mini dengan saus spesial", tag: null },
+      { name: "Choco Brownie", price: "28", desc: "Brownies cokelat pekat", tag: null, photo: { src: "/images/menu-16.jpg", alt: "Choco brownie dengan es krim vanila, saus stroberi, dan irisan pisang" } },
+      { name: "Mini Burger", price: "28", desc: "Burger mini dengan saus spesial", tag: null, photo: { src: "/images/menu-11.jpg", alt: "Tiga mini burger berisi ayam suwir berbumbu" } },
     ],
   },
 };
@@ -142,7 +164,7 @@ export function Menu() {
                 /* Hover dibatasi ke tab non-aktif: `hover:text-charcoal`
                    tanpa batas itu membuat tab aktif jadi arang di atas
                    arang, sehingga labelnya hilang saat disentuh kursor. */
-                className="text-label-caps shrink-0 cursor-pointer rounded-full border border-taupe bg-cream-light px-5 py-3 text-[9.5px] whitespace-nowrap text-charcoal/60 transition-colors duration-200 outline-none select-none hover:not-data-active:border-charcoal/40 hover:not-data-active:text-charcoal focus-visible:ring-2 focus-visible:ring-gold/60 data-active:border-charcoal data-active:bg-charcoal data-active:text-cream-light data-active:hover:border-coffee data-active:hover:bg-coffee"
+                className="text-label-caps shrink-0 cursor-pointer rounded-full border border-taupe bg-cream-light px-5 py-3 whitespace-nowrap text-charcoal/70 transition-colors duration-200 outline-none select-none hover:not-data-active:border-charcoal/40 hover:not-data-active:text-charcoal focus-visible:ring-2 focus-visible:ring-gold/60 data-active:border-charcoal data-active:bg-charcoal data-active:text-cream-light data-active:hover:border-coffee data-active:hover:bg-coffee"
               >
                 {category.label}
               </Tabs.Tab>
@@ -168,10 +190,10 @@ export function Menu() {
                     />
                   )}
                   <div>
-                    <p className="text-label-caps text-[9px] text-gold">
+                    <p className="text-label-caps text-gold-deep">
                       Dari dapur · {category.label}
                     </p>
-                    <p className="text-body-md mt-2 max-w-md text-charcoal/55">
+                    <p className="text-body-md mt-2 max-w-md text-charcoal/70">
                       {category.note}
                     </p>
                   </div>
@@ -188,21 +210,33 @@ export function Menu() {
                       className="h-full"
                     >
                       <article className="group flex h-full flex-col justify-between rounded-2xl border border-taupe/70 bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-[0_12px_32px_-12px_rgba(35,28,24,0.18)]">
-                        <div>
-                          <div className="flex items-start justify-between gap-3">
-                            <h3 className="text-serif-md text-charcoal transition-colors group-hover:text-coffee">
-                              {item.name}
-                            </h3>
-                            <span className="text-price-tag tabular shrink-0 text-gold">
-                              {item.price}k
-                            </span>
+                        <div className="flex items-start gap-4">
+                          {item.photo && (
+                            <Image
+                              src={item.photo.src}
+                              alt={item.photo.alt}
+                              width={160}
+                              height={160}
+                              sizes="5rem"
+                              className="aspect-square w-18 shrink-0 rounded-xl object-cover sm:w-20"
+                            />
+                          )}
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-start justify-between gap-3">
+                              <h3 className="text-serif-md text-charcoal transition-colors group-hover:text-coffee">
+                                {item.name}
+                              </h3>
+                              <span className="text-price-tag tabular shrink-0 text-gold-deep">
+                                {item.price}k
+                              </span>
+                            </div>
+                            <p className="text-body-sm mt-2 text-charcoal/70">{item.desc}</p>
                           </div>
-                          <p className="text-body-sm mt-2 text-charcoal/45">{item.desc}</p>
                         </div>
 
                         {item.tag && (
                           <p className="mt-4 border-t border-taupe/40 pt-3">
-                            <span className="text-label-caps rounded-md bg-gold/10 px-2.5 py-1 text-[8.5px] text-gold">
+                            <span className="text-label-caps rounded-md bg-gold/10 px-2.5 py-1 text-gold-deep">
                               {item.tag}
                             </span>
                           </p>

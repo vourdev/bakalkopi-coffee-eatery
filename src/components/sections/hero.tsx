@@ -110,7 +110,7 @@ export function Hero() {
               {FACTS.map((fact) => (
                 <li
                   key={fact}
-                  className="text-label-caps flex items-center gap-2 text-[9.5px] text-cream-light/45"
+                  className="text-label-caps flex items-center gap-2 text-cream-light/70"
                 >
                   <span aria-hidden="true" className="h-1 w-1 rotate-45 bg-gold" />
                   {fact}

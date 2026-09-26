@@ -19,7 +19,7 @@ export function Story() {
           {/* Kiri — naskah */}
           <div className="lg:col-span-5">
             <AnimatedContent distance={26}>
-              <span className="text-label-caps flex items-center gap-3 text-gold">
+              <span className="text-label-caps flex items-center gap-3 text-gold-deep">
                 Cerita Kami
                 <span aria-hidden="true" className="h-px w-10 bg-current opacity-50" />
               </span>
@@ -30,13 +30,13 @@ export function Story() {
                 sekadar kopi
               </h2>
 
-              <p className="text-script mt-2 text-4xl text-gold md:text-5xl">
+              <p className="text-script mt-2 text-4xl text-gold-deep md:text-5xl">
                 Rasa yang mengingatkan rumah
               </p>
             </AnimatedContent>
 
             <AnimatedContent delay={0.15} distance={22}>
-              <p className="text-body-lg mt-7 text-charcoal/60">
+              <p className="text-body-lg mt-7 text-charcoal/70">
                 BAKALKOPI mempertemukan kopi single origin, masakan rumahan
                 Indonesia, dan minuman racikan di ruang tropis yang sengaja
                 dibuat untuk memperlambat langkah.
@@ -55,11 +55,11 @@ export function Story() {
                     {i > 0 && <span aria-hidden="true" className="h-12 w-px bg-taupe" />}
                     <div>
                       <dt className="sr-only">{stat.label}</dt>
-                      <dd className="text-headline-lg tabular text-gold">
+                      <dd className="text-headline-lg tabular text-gold-deep">
                         <CountUp to={stat.value} duration={1.6} />
                         {stat.suffix}
                       </dd>
-                      <p className="text-label-caps mt-1.5 max-w-[9rem] text-[9.5px] text-charcoal/45">
+                      <p className="text-label-caps mt-1.5 max-w-[9rem] text-charcoal/70">
                         {stat.label}
                       </p>
                     </div>
@@ -94,7 +94,7 @@ export function Story() {
                 </div>
                 <div className="px-1.5 pt-3 pb-1">
                   <p className="text-serif-md text-charcoal">Ruang Mural</p>
-                  <p className="text-body-sm mt-0.5 text-charcoal/45">
+                  <p className="text-body-sm mt-0.5 text-charcoal/70">
                     Seni tangan &amp; sudut paling sering difoto
                   </p>
                 </div>

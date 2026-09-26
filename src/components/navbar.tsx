@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { BrandMark } from "@/components/brand-mark";
 import { MobileNav } from "@/components/mobile-nav";
 import { SITE, WA_RESERVASI } from "@/lib/site";
 
@@ -77,32 +77,8 @@ export function Navbar() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-10">
         {/* Merek. Ukurannya dikecilkan di ponsel: pada 390px versi lama
             memakan hampir separuh lebar bar. */}
-        <Link href="#beranda" className="group flex items-center gap-2.5 md:gap-3">
-          <Image
-            src="/images/logo.png"
-            alt=""
-            width={44}
-            height={44}
-            className="h-9 w-9 rounded-full ring-1 ring-taupe/70 transition-transform duration-300 group-hover:scale-105 md:h-11 md:w-11"
-          />
-          <span className="flex flex-col leading-none">
-            <span
-              className={[
-                "font-display text-[15px] font-medium tracking-[0.04em] uppercase transition-colors duration-300 md:text-xl",
-                solid ? "text-charcoal" : "text-cream-light",
-              ].join(" ")}
-            >
-              {SITE.name}
-            </span>
-            <span
-              className={[
-                "text-label-caps mt-1 text-[7px] transition-colors duration-300 md:text-[8.5px]",
-                solid ? "text-gold" : "text-gold-light",
-              ].join(" ")}
-            >
-              {SITE.eyebrow}
-            </span>
-          </span>
+        <Link href="#beranda" aria-label={SITE.name} className="group">
+          <BrandMark tone={solid ? "light" : "dark"} />
         </Link>
 
         {/* Navigasi layar lebar */}
@@ -115,11 +91,11 @@ export function Navbar() {
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
                 className={[
-                  "text-label-caps relative py-1 text-[10px] transition-colors duration-200",
+                  "text-label-caps relative py-1 transition-colors duration-200",
                   solid
                     ? isActive
                       ? "text-charcoal"
-                      : "text-charcoal/55 hover:text-charcoal"
+                      : "text-charcoal/70 hover:text-charcoal"
                     : isActive
                       ? "text-cream-light"
                       : "text-cream-light/65 hover:text-cream-light",
@@ -145,7 +121,7 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className={[
-              "text-label-caps hidden items-center rounded-md px-6 py-3 text-[10px] transition-colors duration-200 active:scale-95 sm:inline-flex",
+              "text-label-caps hidden items-center rounded-md px-6 py-3 transition-colors duration-200 active:scale-95 sm:inline-flex",
               solid
                 ? "bg-charcoal text-cream-light hover:bg-coffee"
                 : "border border-cream-light/45 text-cream-light hover:border-gold hover:bg-gold/15",
