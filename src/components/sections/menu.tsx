@@ -52,7 +52,10 @@ const MENU_DATA: Record<string, MenuCategory> = {
   kopi: {
     label: "Kopi",
     note: "Single origin Nusantara, diseduh manual maupun dengan mesin.",
-    cover: null,
+    cover: {
+      src: "/images/menu-21.jpg",
+      alt: "Alpacino: kopi dan alpukat diblender, dengan satu skop Ice Cream Bakal",
+    },
     items: [
       { name: "Es Bakalkopi", price: "29", desc: "Racikan espresso rumahan, susu segar dingin, dan gula aren organik", tag: "Favorit" },
       { name: "Latte", price: "29", desc: "Espresso klasik dengan susu segar yang di-steam", tag: null },
@@ -62,7 +65,7 @@ const MENU_DATA: Record<string, MenuCategory> = {
       { name: "Dirty Matcha", price: "35", desc: "Matcha premium dengan satu shot espresso", tag: "Favorit" },
       { name: "Kori-Kohi", price: "35", desc: "Espresso beku ala Jepang", tag: null },
       { name: "Affogato", price: "30", desc: "Espresso panas dituang di atas es krim", tag: null },
-      { name: "Mochacino", price: "38", desc: "Espresso, cokelat, dan susu steam", tag: null },
+      { name: "Mochacino", price: "38", desc: "Espresso, cokelat, dan susu steam", tag: null, photo: { src: "/images/menu-22.jpg", alt: "Mochacino dingin berbusa dengan guratan cokelat di dinding gelas" } },
       { name: "Americano", price: "22", desc: "Double shot espresso dengan air", tag: null },
       { name: "V60 Manual Brew", price: "33", desc: "Single origin, seduh tuang manual per cangkir", tag: "Spesial" },
     ],
@@ -103,11 +106,11 @@ const MENU_DATA: Record<string, MenuCategory> = {
     label: "Non-Kopi",
     note: "Cokelat, matcha, yoghurt, dan teh untuk yang sedang tidak ingin kopi.",
     cover: {
-      src: "/images/menu-10.jpg",
-      alt: "Minuman cokelat dingin dalam gelas tinggi dengan serutan cokelat",
+      src: "/images/menu-19.jpg",
+      alt: "Smoothie pisang dan yoghurt dalam gelas tinggi, dengan es krim vanila di atasnya",
     },
     items: [
-      { name: "Dark Chocolate", price: "30", desc: "Cokelat hitam pekat dan lembut", tag: null },
+      { name: "Dark Chocolate", price: "30", desc: "Cokelat hitam pekat dan lembut", tag: null, photo: { src: "/images/menu-10.jpg", alt: "Minuman cokelat dingin dalam gelas tinggi dengan serutan cokelat" } },
       { name: "Matcha Latte", price: "27", desc: "Matcha Jepang premium dengan susu segar", tag: "Favorit", photo: { src: "/images/menu-5.jpg", alt: "Es matcha latte hijau dalam gelas tinggi" } },
       { name: "Taro Latte", price: "26", desc: "Talas lembut dengan susu steam", tag: null },
       { name: "Red Velvet", price: "24", desc: "Minuman susu red velvet", tag: null },
