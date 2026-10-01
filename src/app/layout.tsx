@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Parisienne, Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import { ADDRESS_LINE, HOURS_LINE, SITE } from "@/lib/site";
 import "./globals.css";
@@ -22,13 +22,28 @@ const parisienne = Parisienne({
   weight: ["400"],
 });
 
+/* Dijaga di bawah ~155 karakter supaya tidak terpotong di hasil Google. */
 const DESCRIPTION =
-  "Kafe dan rumah makan Nusantara di Cimanggis, Depok. Kopi single origin, masakan rumahan Indonesia, teras terbuka, akustik akhir pekan, dan parkiran luas. Buka setiap hari 08.00–23.00 WIB.";
+  "Kafe & rumah makan Nusantara di Cimanggis, Depok. Kopi single origin, masakan rumahan, teras terbuka, live akustik, parkir luas. Buka 08.00–23.00 WIB.";
 
+/* Versi lebih pendek untuk kartu pratinjau WhatsApp/Facebook/X, yang hanya
+   menampilkan satu-dua baris di bawah gambar. */
+const SHARE_DESCRIPTION =
+  "Kopi single origin & masakan rumahan Nusantara di Cimanggis, Depok. Buka setiap hari 08.00–23.00 WIB.";
+
+const TITLE = `${SITE.name} — Kafe & Rumah Makan Nusantara di Depok`;
+
+export const viewport: Viewport = {
+  themeColor: "#231c18",
+};
+
+/* Gambar pratinjau berasal dari konvensi berkas opengraph-image.jpg dan
+   twitter-image.jpg di folder ini (1200×630, <300 KB agar WhatsApp mau
+   memuatnya), jadi tidak ditulis ulang di sini. */
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Kafe & Rumah Makan Nusantara di Depok`,
+    default: TITLE,
     template: `%s · ${SITE.name}`,
   },
   description: DESCRIPTION,
@@ -49,24 +64,21 @@ export const metadata: Metadata = {
     locale: "id_ID",
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.name} — ${SITE.headline}`,
-    description: DESCRIPTION,
-    images: [
-      {
-        url: "/images/BakalKopi-home.jpg",
-        width: 1920,
-        height: 1280,
-        alt: `Fasad ${SITE.name} pada malam hari dengan papan nama menyala`,
-      },
-    ],
+    title: TITLE,
+    description: SHARE_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${SITE.headline}`,
-    description: DESCRIPTION,
-    images: ["/images/BakalKopi-home.jpg"],
+    title: TITLE,
+    description: SHARE_DESCRIPTION,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+  formatDetection: { telephone: false },
+  category: "food",
 };
 
 /** Data terstruktur untuk hasil pencarian lokal dan Google Maps. */

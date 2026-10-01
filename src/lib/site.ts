@@ -9,7 +9,13 @@ export const SITE = {
   tagline: "DELIGHT. SAVOR. CONNECT.",
   headline: "GOOD FOOD. GOOD COFFEE. GOOD MOMENTS.",
   eyebrow: "KOPI & DAPUR NUSANTARA",
-  url: "https://bakalkopi.id",
+  /**
+   * Domain produksi. Semua tautan absolut (og:image, canonical, sitemap,
+   * JSON-LD) dibangun dari sini, jadi harus domain yang benar-benar hidup —
+   * kalau tidak, pratinjau di WhatsApp/Facebook kosong. Ganti lewat
+   * NEXT_PUBLIC_SITE_URL saat pindah domain, tanpa mengubah kode.
+   */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bakalkopi.vour.dev",
 
   address: {
     street: "Jl. RTM Gg. Sadar No. 4A, RT.008/RW.010",
