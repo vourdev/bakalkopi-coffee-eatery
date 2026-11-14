@@ -85,14 +85,14 @@ export function InteractiveHoverButton({
         <ArrowRight className="h-4 w-4 shrink-0" strokeWidth={1.5} />
       </motion.span>
 
-      {/* Pusat tetap di 18% dan radius 86% pas dengan tepi kanan pil, jadi tidak ada gerak terbuang di luar overflow. */}
+      {/* Di CSS circle(), 100% = sqrt(W^2+H^2)/sqrt(2) (~0.73W), jadi dari 18% ke tepi kanan (0.82W) butuh ~120%. */}
       <motion.span
         aria-hidden="true"
         className={`pointer-events-none absolute inset-0 flex items-center justify-center ${fillClassName}`}
         initial={false}
         animate={{
           clipPath: active
-            ? "circle(86% at 18% 50%)"
+            ? "circle(122% at 18% 50%)"
             : "circle(0% at 18% 50%)",
         }}
         transition={t}
