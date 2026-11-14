@@ -13,13 +13,7 @@ const EXPLORE_LINKS = [
   { label: "Fasilitas", href: "#fasilitas" },
 ];
 
-const COMMITMENT_LINKS = [
-  { label: "Komitmen Halal", href: "#fasilitas" },
-  { label: "Dukungan Petani Lokal", href: "#cerita" },
-  { label: "Reservasi & Acara", href: "#lokasi" },
-];
-
-/** lucide-react 1.x tidak lagi menyertakan ikon merek, jadi ditulis sendiri. */
+/** lucide-react 1.x tidak menyertakan ikon merek. */
 function InstagramGlyph({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -45,8 +39,7 @@ export function Footer() {
   return (
     <footer id="kontak" className="bg-charcoal text-cream-light">
       <div className="mx-auto max-w-7xl px-5 py-16 md:px-10">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Merek */}
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
               <Image
@@ -65,39 +58,21 @@ export function Footer() {
             <p className="text-label-caps pt-1 text-gold">{SITE.tagline}</p>
           </div>
 
-          {/* Jelajahi */}
-          <nav className="flex flex-col gap-3" aria-label="Jelajahi halaman">
-            <h2 className="text-label-caps mb-1 text-cream-light">
+          <nav className="flex flex-col items-start" aria-label="Jelajahi halaman">
+            <h2 className="text-label-caps mb-2 text-cream-light">
               Jelajahi
             </h2>
             {EXPLORE_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-body-sm text-cream-light/70 transition-colors duration-200 hover:text-cream-light"
+                className="text-body-sm inline-flex min-h-11 min-w-11 items-center text-cream-light/70 transition-colors duration-200 hover:text-cream-light active:opacity-70"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* Komitmen */}
-          <nav className="flex flex-col gap-3" aria-label="Komitmen kami">
-            <h2 className="text-label-caps mb-1 text-cream-light">
-              Komitmen
-            </h2>
-            {COMMITMENT_LINKS.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-body-sm text-cream-light/70 transition-colors duration-200 hover:text-cream-light"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Kontak */}
           <div className="flex flex-col gap-4">
             <h2 className="text-label-caps text-cream-light">Kunjungi</h2>
 
@@ -119,7 +94,7 @@ export function Footer() {
               href={WA_TANYA}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-body-sm flex items-center gap-2.5 text-cream-light/70 transition-colors hover:text-cream-light"
+              className="text-body-sm flex min-h-11 items-center gap-2.5 text-cream-light/70 transition-colors hover:text-cream-light active:opacity-70"
             >
               <Phone className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} />
               {SITE.contact.whatsappDisplay}
@@ -129,7 +104,7 @@ export function Footer() {
               href={SITE.contact.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-body-sm flex items-center gap-2.5 text-gold transition-colors hover:text-gold-light"
+              className="text-body-sm flex min-h-11 items-center gap-2.5 text-gold transition-colors hover:text-gold-light active:opacity-70"
             >
               <InstagramGlyph className="h-4 w-4 shrink-0" />@{SITE.contact.instagram}
             </Link>

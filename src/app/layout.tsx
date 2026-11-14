@@ -22,24 +22,21 @@ const parisienne = Parisienne({
   weight: ["400"],
 });
 
-/* Dijaga di bawah ~155 karakter supaya tidak terpotong di hasil Google. */
+// Di bawah ~155 karakter agar tidak terpotong di hasil Google.
 const DESCRIPTION =
-  "Kafe & rumah makan Nusantara di Cimanggis, Depok. Kopi single origin, masakan rumahan, teras terbuka, live akustik, parkir luas. Buka 08.00–23.00 WIB.";
+  "Kafe & rumah makan Nusantara di Cimanggis, Depok. Kopi single origin, masakan rumahan, teras terbuka, live akustik, parkir luas. Buka 08.00-23.00 WIB.";
 
-/* Versi lebih pendek untuk kartu pratinjau WhatsApp/Facebook/X, yang hanya
-   menampilkan satu-dua baris di bawah gambar. */
+// Kartu pratinjau WhatsApp/Facebook/X hanya menampilkan satu-dua baris.
 const SHARE_DESCRIPTION =
-  "Kopi single origin & masakan rumahan Nusantara di Cimanggis, Depok. Buka setiap hari 08.00–23.00 WIB.";
+  "Kopi single origin & masakan rumahan Nusantara di Cimanggis, Depok. Buka setiap hari 08.00-23.00 WIB.";
 
-const TITLE = `${SITE.name} — Kafe & Rumah Makan Nusantara di Depok`;
+const TITLE = `${SITE.name} · Kafe & Rumah Makan Nusantara di Depok`;
 
 export const viewport: Viewport = {
   themeColor: "#231c18",
 };
 
-/* Gambar pratinjau berasal dari konvensi berkas opengraph-image.jpg dan
-   twitter-image.jpg di folder ini (1200×630, <300 KB agar WhatsApp mau
-   memuatnya), jadi tidak ditulis ulang di sini. */
+// Gambar pratinjau dari opengraph-image.jpg di folder ini; jaga di bawah 300 KB agar WhatsApp memuatnya.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
@@ -81,7 +78,6 @@ export const metadata: Metadata = {
   category: "food",
 };
 
-/** Data terstruktur untuk hasil pencarian lokal dan Google Maps. */
 const JSON_LD = {
   "@context": "https://schema.org",
   "@type": "CafeOrCoffeeShop",
@@ -94,7 +90,7 @@ const JSON_LD = {
   logo: `${SITE.url}/images/logo.png`,
   slogan: SITE.tagline,
   telephone: `+${SITE.contact.whatsapp}`,
-  priceRange: "Rp22.000 – Rp55.000",
+  priceRange: "Rp22.000-Rp55.000",
   servesCuisine: ["Indonesia", "Nusantara", "Kopi", "Pasta"],
   currenciesAccepted: "IDR",
   address: {
@@ -129,7 +125,7 @@ const JSON_LD = {
   ],
   sameAs: [SITE.contact.instagramUrl],
   amenityFeature: [
-    { "@type": "LocationFeatureSpecification", name: "Wi-Fi gratis", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Wi-Fi", value: true },
     { "@type": "LocationFeatureSpecification", name: "Parkir luas", value: true },
     { "@type": "LocationFeatureSpecification", name: "Ruang ber-AC", value: true },
     { "@type": "LocationFeatureSpecification", name: "Teras terbuka", value: true },

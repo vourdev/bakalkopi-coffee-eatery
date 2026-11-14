@@ -17,11 +17,7 @@ const NAV_LINKS = [
 
 const SECTION_IDS = NAV_LINKS.map((link) => link.id);
 
-/**
- * Menandai tautan yang bagiannya sedang terlihat. Ambang atas -45% membuat
- * pergantian terjadi saat bagian melewati sepertiga atas layar, bukan saat
- * ujungnya baru menyentuh tepi bawah.
- */
+// rootMargin -45%: tautan berganti saat bagian melewati tengah layar, bukan saat baru masuk.
 function useActiveSection(ids: readonly string[]) {
   const [active, setActive] = useState(ids[0]);
 
@@ -60,9 +56,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Di puncak halaman bar melayang bening di atas foto hero yang gelap.
-     Begitu digulir ia jadi pita krem pekat, karena sisa halaman berlatar
-     terang. */
+  // Bening di atas hero gelap; krem pekat begitu digulir karena sisa halaman terang.
   const solid = scrolled;
 
   return (
@@ -74,14 +68,11 @@ export function Navbar() {
           : "border-b border-transparent bg-transparent",
       ].join(" ")}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-10">
-        {/* Merek. Ukurannya dikecilkan di ponsel: pada 390px versi lama
-            memakan hampir separuh lebar bar. */}
+      <div className="mx-auto flex h-16 max-w-7xl md:h-20 items-center justify-between px-5 md:px-10">
         <Link href="#beranda" aria-label={SITE.name} className="group">
           <BrandMark tone={solid ? "light" : "dark"} />
         </Link>
 
-        {/* Navigasi layar lebar */}
         <nav className="hidden items-center gap-9 lg:flex">
           {NAV_LINKS.map((link) => {
             const isActive = active === link.id;
@@ -121,7 +112,7 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className={[
-              "text-label-caps hidden items-center rounded-md px-6 py-3 transition-colors duration-200 active:scale-95 sm:inline-flex",
+              "text-label-caps hidden min-h-11 items-center rounded-full px-6 py-3 transition-colors duration-200 active:scale-95 sm:inline-flex",
               solid
                 ? "bg-charcoal text-cream-light hover:bg-coffee"
                 : "border border-cream-light/45 text-cream-light hover:border-gold hover:bg-gold/15",

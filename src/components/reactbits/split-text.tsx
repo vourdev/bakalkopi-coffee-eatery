@@ -1,14 +1,6 @@
 "use client";
 
-/**
- * SplitText — port React Bits (reactbits.dev) dari GSAP SplitText ke `motion`.
- * Versi asli bergantung pada gsap, ScrollTrigger, plugin SplitText, dan
- * @gsap/react; di sini pemecahan teks dilakukan sendiri agar satu-satunya
- * pustaka gerak di proyek ini tetap motion.
- *
- * Pemecahan selalu per kata dulu, baru per huruf di dalam kata, supaya
- * pergantian baris tetap jatuh di antar-kata.
- */
+// Port SplitText dari React Bits ke `motion`. Dipecah per kata dulu agar baris putus di antar-kata.
 
 import { motion, useReducedMotion } from "motion/react";
 import { Fragment, type ElementType } from "react";
@@ -20,10 +12,7 @@ interface SplitTextProps {
   delay?: number;
   duration?: number;
   splitType?: "chars" | "words";
-  /**
-   * Pemenggalan baris yang dipaksa. Tanpa ini baris jatuh mengikuti lebar
-   * wadah, sehingga slogan tiga kalimat bisa terpecah di tempat yang salah.
-   */
+  /** Pemenggalan baris yang dipaksa, agar slogan tidak pecah di tempat salah. */
   lines?: string[];
   from?: { opacity?: number; y?: number };
   to?: { opacity?: number; y?: number };
@@ -104,10 +93,7 @@ export default function SplitText({
                   );
                 })}
               </span>
-              {/* Spasi harus jadi saudara antar kata, bukan anak terakhir di
-                  dalam span kata: spasi di ujung sebuah inline-block diciutkan
-                  jadi nol lebar, sehingga kata-kata menempel. Sebagai saudara,
-                  spasi ini juga memberi titik putus baris yang wajar. */}
+              {/* Spasi di luar span kata: di ujung inline-block ia diciutkan jadi nol lebar. */}
               {w < words.length - 1 ? " " : null}
             </Fragment>
           );

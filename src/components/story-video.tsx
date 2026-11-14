@@ -13,24 +13,8 @@ interface StoryVideoProps {
   label: string;
 }
 
-/**
- * Poster cerita dengan tombol putar; videonya dibuka di popup.
- *
- * Elemen <video> hanya dipasang selagi popup terbuka, jadi berkasnya (18 MB)
- * tidak diunduh sama sekali sampai pengguna menekan tombol. Pemutarannya
- * memakai kontrol bawaan peramban — tidak ada kontrol kustom yang perlu
- * dirawat, dan di ponsel pengguna langsung dapat layar penuh serta AirPlay.
- *
- * Dialog Base UI dipakai supaya fokus terkunci, Escape menutup, dan latar
- * belakangnya tidak bisa digulir — hal-hal yang harus ditulis sendiri kalau
- * memakai overlay buatan tangan.
- *
- * Pemutaran dimulai lewat panggilan imperatif, bukan atribut autoPlay, dengan
- * cadangan senyap: peramban menolak autoplay bersuara kalau aktivasi pengguna
- * dianggap sudah kedaluwarsa, dan tanpa cadangan itu videonya diam total.
- * Berkas saat ini memang tidak punya jalur audio, tapi jalur ini sudah siap
- * begitu berkasnya diganti dengan yang bersuara.
- */
+// <video> hanya dipasang saat popup terbuka, jadi berkas 18 MB tidak diunduh sebelum ditekan.
+// Putar imperatif dengan cadangan senyap: peramban bisa menolak autoplay bersuara.
 export function StoryVideo({ src, poster, alt, label }: StoryVideoProps) {
   const [open, setOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -53,7 +37,7 @@ export function StoryVideo({ src, poster, alt, label }: StoryVideoProps) {
         if (!next) videoRef.current?.pause();
       }}
     >
-      <div className="relative overflow-hidden rounded-[2rem] border border-taupe shadow-xl">
+      <div className="relative overflow-hidden rounded-[2rem] border border-taupe">
         <Image
           src={poster}
           alt={alt}
@@ -77,12 +61,12 @@ export function StoryVideo({ src, poster, alt, label }: StoryVideoProps) {
       </div>
 
       <Dialog.Portal>
-        <Dialog.Backdrop className="fixed inset-0 z-[60] bg-charcoal/85 backdrop-blur-sm" />
+        <Dialog.Backdrop className="fixed inset-0 z-[60] bg-charcoal/90" />
         <Dialog.Popup className="fixed inset-0 z-[60] grid place-items-center p-4">
           <div className="relative w-full max-w-4xl">
             <Dialog.Close
               aria-label="Tutup video"
-              className="absolute -top-11 right-0 grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-cream-light/30 text-cream-light transition-colors hover:border-gold hover:text-gold"
+              className="absolute -top-13 right-0 grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-cream-light/30 text-cream-light transition-colors hover:border-gold hover:text-gold active:scale-95"
             >
               <X className="h-4 w-4" strokeWidth={1.5} />
             </Dialog.Close>

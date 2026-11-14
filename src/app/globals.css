@@ -2,9 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/* Berkas Markdown di akar proyek memuat contoh kelas seperti
-   `bg-[#B98A4A]/10`. Pemindaian otomatis Tailwind ikut membacanya dan
-   menghasilkan utility mati, jadi dokumentasi dikeluarkan dari sumber. */
+/* Contoh kelas di berkas .md akar proyek jangan sampai jadi utility mati. */
 @source not "../../*.md";
 
 @custom-variant dark (&:is(.dark *));
@@ -52,17 +50,13 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* ===== Palet BAKALKOPI =====
-     Dihangatkan ke arah espresso/parchment: hitam kebiruan dibuang,
-     emas diturunkan saturasinya jadi kuningan tua. */
+  /* Palet BAKALKOPI */
   --color-charcoal: #231c18;
   --color-charcoal-light: #2e2622;
   --color-coffee: #4a3527;
   --color-gold: #a97f4f;
   --color-gold-light: #c79a5e;
-  /* Emas untuk TEKS di latar terang. `gold` hanya 3.0:1 di atas krem —
-     cukup untuk ornamen, tapi tidak terbaca nyaman untuk harga dan
-     label. Versi ini 5.1:1 di krem dan 6.1:1 di putih (WCAG AA). */
+  /* Teks emas di latar terang: `gold` hanya 3.0:1 di krem, ini 5.1:1 (WCAG AA). */
   --color-gold-deep: #7f5b2f;
   --color-cream: #f1eade;
   --color-cream-light: #faf6ee;
@@ -70,7 +64,7 @@
   --color-taupe: #ded3c4;
   --color-amber-soft: #ebd5b3;
 
-  /* ===== Keluarga huruf ===== */
+  /* Keluarga huruf */
   --font-display: var(--font-playfair);
   --font-body: var(--font-jakarta);
   --font-script: var(--font-parisienne);
@@ -121,17 +115,22 @@
   html {
     @apply scroll-smooth;
   }
-  /* Header menempel setinggi 5rem; tanpa ini tautan jangkar menaruh judul
-     bagian di belakangnya. */
+  /* Tinggi header lengket (4rem ponsel, 5rem md) plus sedikit napas. */
   :target,
   section[id],
   footer[id] {
-    scroll-margin-top: 5.5rem;
+    scroll-margin-top: 4.5rem;
+  }
+  @media (min-width: 48rem) {
+    :target,
+    section[id],
+    footer[id] {
+      scroll-margin-top: 5.5rem;
+    }
   }
 }
 
-/* Seleksi teks. Emas pekat dengan teks arang terbaca di latar terang maupun
-   gelap; emas transparan sebelumnya membuat teks di pita arang nyaris hilang. */
+/* Emas pekat: emas transparan membuat teks seleksi di latar arang hilang. */
 ::selection {
   background-color: #c79a5e;
   color: #231c18;
@@ -141,31 +140,13 @@
   color: #231c18;
 }
 
-/* ===== Skala tipografi =====
-   Display selalu huruf kapital dengan tracking positif — kapital butuh
-   ruang ekstra, bukan tracking negatif seperti pada teks huruf kecil. */
-.text-display-hero {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 500;
-  line-height: 1.04;
-  letter-spacing: 0.015em;
-  text-transform: uppercase;
-}
+/* Skala tipografi. Display kapital memakai tracking positif. */
 .text-headline-lg {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3.6vw, 2.875rem);
   font-weight: 500;
   line-height: 1.12;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-.text-headline-md {
-  font-family: var(--font-display);
-  font-size: clamp(1.375rem, 2.4vw, 1.875rem);
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 .text-headline-sm {
@@ -176,7 +157,7 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-/* Serif tanpa paksaan kapital — untuk nama hidangan dan kutipan. */
+/* Serif tanpa paksaan kapital, untuk nama hidangan. */
 .text-serif-md {
   font-family: var(--font-display);
   font-size: 1.1875rem;
@@ -189,9 +170,7 @@
   line-height: 1.1;
   letter-spacing: 0.01em;
 }
-/* Skala isi dinaikkan untuk pembaca segala usia: teks utama minimal 16px,
-   teks pendamping 15px. Sebelumnya 15px dan 13px — terlalu kecil untuk
-   pengunjung paruh baya yang membaca menu di ponsel. */
+/* Teks isi minimal 16px, pendamping 15px, agar menu terbaca di ponsel. */
 .text-body-lg {
   font-family: var(--font-body);
   font-size: 1.125rem;
@@ -210,9 +189,7 @@
   font-weight: 400;
   line-height: 1.6;
 }
-/* Kapital kecil: 12px dengan tracking 0.16em. Pada 11px/0.22em hurufnya
-   terlalu renggang untuk dibaca sebagai kata — terasa seperti deretan
-   huruf lepas, terutama bagi mata yang sudah tidak muda. */
+/* 12px/0.16em: tracking lebih lebar membuat kapital terbaca sebagai huruf lepas. */
 .text-label-caps {
   font-family: var(--font-body);
   font-size: 0.75rem;
@@ -229,20 +206,15 @@
   letter-spacing: 0.04em;
 }
 
-/* Angka rata lebar — harga dan penghitung tidak bergoyang saat berubah. */
+/* Angka rata lebar agar kolom harga sejajar. */
 .tabular {
   font-variant-numeric: tabular-nums;
 }
 
-/* ===== Hero satu layar =====
-   Ukurannya ikut tinggi viewport, bukan hanya lebarnya. Skala biasa hanya
-   membaca vw, jadi pada layar pendek-tapi-lebar isi hero meluber melewati
-   satu layar. Paragraf pengantar disembunyikan di layar sangat pendek —
-   isinya diulang di bagian Cerita tepat di bawahnya. */
+/* Hero ikut tinggi viewport juga, agar layar pendek-tapi-lebar tidak meluber. */
 .hero-display {
   font-family: var(--font-display);
-  /* Batas atas 3.75rem: kolom naskah hero kini selebar max-w-2xl (672px),
-     cukup untuk menahan "GOOD MOMENTS." pada satu baris di ukuran itu. */
+  /* 3.75rem: batas agar "GOOD MOMENTS." muat satu baris di max-w-2xl. */
   font-size: clamp(1.75rem, min(5.2vw, 7svh), 3.75rem);
   font-weight: 500;
   line-height: 1.05;
@@ -255,49 +227,16 @@
   font-weight: 400;
   line-height: 1.6;
 }
-/* Layar sangat pendek: bagian pelengkap hero disembunyikan supaya isi
-   utamanya tetap muat satu layar tanpa mengecilkan tipografi. */
+/* Layar sangat pendek: daftar fakta hero disembunyikan agar isi utama muat. */
 @media (max-height: 780px) {
   .hero-collapsible {
     display: none;
   }
 }
 
-
-/* ===== Gerak =====
-   Satu-satunya animasi CSS yang tersisa; sisanya ditangani `motion`. */
-@keyframes float-gentle {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-8deg);
-  }
-  50% {
-    transform: translateY(-6px) rotate(-6deg);
-  }
-}
-.animate-float {
-  animation: float-gentle 5s ease-in-out infinite;
-}
-
-@keyframes marquee-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-.animate-marquee {
-  animation: marquee-left 32s linear infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .animate-float,
-  .animate-marquee {
-    animation: none !important;
   }
   *,
   *::before,
@@ -308,7 +247,7 @@
   }
 }
 
-/* Bilah gulir mendatar pada baris tab menu. */
+/* Bilah gulir baris tab menu. */
 .custom-scroll::-webkit-scrollbar {
   height: 3px;
 }

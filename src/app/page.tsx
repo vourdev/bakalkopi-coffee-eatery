@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/sections/hero";
-import { Features } from "@/components/sections/features";
 import { Story } from "@/components/sections/story";
 import { Favorites } from "@/components/sections/favorites";
 import { Menu } from "@/components/sections/menu";
@@ -16,10 +15,8 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-background">
       <Navbar />
       <main className="flex-1">
-        {/* Terang */}
-        <Hero />
         {/* Gelap */}
-        <Features />
+        <Hero />
         {/* Terang */}
         <Story />
         <Favorites />

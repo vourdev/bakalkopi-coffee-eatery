@@ -1,7 +1,4 @@
-/**
- * Sumber tunggal data bisnis BAKALKOPI.
- * Dipakai oleh section, footer, metadata, dan JSON-LD LocalBusiness.
- */
+// Sumber tunggal data bisnis: section, footer, metadata, dan JSON-LD membaca dari sini.
 
 export const SITE = {
   name: "BAKALKOPI",
@@ -9,12 +6,7 @@ export const SITE = {
   tagline: "DELIGHT. SAVOR. CONNECT.",
   headline: "GOOD FOOD. GOOD COFFEE. GOOD MOMENTS.",
   eyebrow: "KOPI & DAPUR NUSANTARA",
-  /**
-   * Domain produksi. Semua tautan absolut (og:image, canonical, sitemap,
-   * JSON-LD) dibangun dari sini, jadi harus domain yang benar-benar hidup —
-   * kalau tidak, pratinjau di WhatsApp/Facebook kosong. Ganti lewat
-   * NEXT_PUBLIC_SITE_URL saat pindah domain, tanpa mengubah kode.
-   */
+  // Harus domain yang hidup: tautan absolut og:image dan canonical dibangun dari sini.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bakalkopi.vour.dev",
 
   address: {
@@ -37,11 +29,11 @@ export const SITE = {
   },
 
   hours: {
-    label: "Senin – Minggu",
+    label: "Senin-Minggu",
     open: "08.00",
     close: "23.00",
     timezone: "WIB",
-    /** Format schema.org: 24 jam, buka setiap hari. */
+    /** Format 24 jam untuk schema.org. */
     opens: "08:00",
     closes: "23:00",
   },
@@ -54,13 +46,11 @@ export const SITE = {
   },
 } as const;
 
-/** Alamat satu baris untuk footer dan metadata. */
 export const ADDRESS_LINE = `${SITE.address.street}, ${SITE.address.village}, ${SITE.address.district}, ${SITE.address.city}, ${SITE.address.region} ${SITE.address.postalCode}`;
 
-/** Jam buka siap tampil, mis. "08.00 – 23.00 WIB". */
-export const HOURS_LINE = `${SITE.hours.open} – ${SITE.hours.close} ${SITE.hours.timezone}`;
+/** Jam buka siap tampil, mis. "08.00-23.00 WIB". */
+export const HOURS_LINE = `${SITE.hours.open}-${SITE.hours.close} ${SITE.hours.timezone}`;
 
-/** Tautan WhatsApp dengan pesan pembuka yang sudah terisi. */
 export function waLink(message: string): string {
   return `https://wa.me/${SITE.contact.whatsapp}?text=${encodeURIComponent(message)}`;
 }

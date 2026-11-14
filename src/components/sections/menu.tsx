@@ -57,7 +57,7 @@ const MENU_DATA: Record<string, MenuCategory> = {
       alt: "Alpacino: kopi dan alpukat diblender, dengan satu skop Ice Cream Bakal",
     },
     items: [
-      { name: "Es Bakalkopi", price: "29", desc: "Racikan espresso rumahan, susu segar dingin, dan gula aren organik", tag: "Favorit" },
+      { name: "Es Bakalkopi", price: "29", desc: "Racikan espresso rumahan, susu segar dingin, dan gula aren", tag: "Favorit" },
       { name: "Latte", price: "29", desc: "Espresso klasik dengan susu segar yang di-steam", tag: null },
       { name: "Cappucino", price: "30", desc: "Espresso pekat dengan busa susu tebal", tag: null },
       { name: "Vanilla Latte", price: "32", desc: "Espresso, susu steam, dan vanila premium", tag: null },
@@ -88,7 +88,7 @@ const MENU_DATA: Record<string, MenuCategory> = {
   },
   ricebowl: {
     label: "Ricebowl & Katsu",
-    note: "Semangkuk nasi dengan lauk bersaus — cepat dan mengenyangkan.",
+    note: "Semangkuk nasi dengan lauk bersaus, cepat dan mengenyangkan.",
     cover: {
       src: "/images/menu-13.jpg",
       alt: "Ricebowl dengan telur orak-arik, daging suwir berbumbu, dan slaw pedas",
@@ -146,28 +146,24 @@ export function Menu() {
   const [activeTab, setActiveTab] = useState("nusantara");
 
   return (
-    <section id="menu" className="bg-cream pt-20 text-charcoal md:pt-28">
+    <section id="menu" className="bg-cream pt-16 text-charcoal md:pt-28">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <SectionHeading
           eyebrow="Daftar Menu"
           title="Masakan yang membuat kembali"
           script="Dapur buka sampai malam"
-          description="Harga dalam ribuan rupiah dan belum termasuk PB1. Semua bahan segar dan halal."
+          description="Harga dalam ribuan rupiah dan belum termasuk PB1."
         />
 
-        {/* Primitive Base UI dipakai langsung, bukan pembungkus shadcn:
-            varian "line" pada pembungkus itu memaksa data-active:bg-transparent
-            sehingga pil aktif tidak pernah terisi. */}
-        <Tabs.Root value={activeTab} onValueChange={(value) => setActiveTab(value as string)} className="mt-14 w-full">
+        {/* Base UI langsung: varian "line" shadcn memaksa bg-transparent pada tab aktif. */}
+        <Tabs.Root value={activeTab} onValueChange={(value) => setActiveTab(value as string)} className="mt-12 w-full md:mt-14">
           <Tabs.List className="custom-scroll mb-10 flex w-full justify-start gap-2.5 overflow-x-auto pb-2">
             {Object.entries(MENU_DATA).map(([key, category]) => (
               <Tabs.Tab
                 key={key}
                 value={key}
-                /* Hover dibatasi ke tab non-aktif: `hover:text-charcoal`
-                   tanpa batas itu membuat tab aktif jadi arang di atas
-                   arang, sehingga labelnya hilang saat disentuh kursor. */
-                className="text-label-caps shrink-0 cursor-pointer rounded-full border border-taupe bg-cream-light px-5 py-3 whitespace-nowrap text-charcoal/70 transition-colors duration-200 outline-none select-none hover:not-data-active:border-charcoal/40 hover:not-data-active:text-charcoal focus-visible:ring-2 focus-visible:ring-gold/60 data-active:border-charcoal data-active:bg-charcoal data-active:text-cream-light data-active:hover:border-coffee data-active:hover:bg-coffee"
+                /* Hover hanya untuk tab non-aktif, agar label tab aktif tidak hilang. */
+                className="text-label-caps shrink-0 cursor-pointer rounded-full border border-taupe bg-cream-light px-5 py-3.5 whitespace-nowrap text-charcoal/70 transition-colors duration-200 outline-none select-none hover:not-data-active:border-charcoal/40 hover:not-data-active:text-charcoal focus-visible:ring-2 focus-visible:ring-gold/60 data-active:border-charcoal data-active:bg-charcoal data-active:text-cream-light data-active:hover:border-coffee data-active:hover:bg-coffee"
               >
                 {category.label}
               </Tabs.Tab>
@@ -176,10 +172,7 @@ export function Menu() {
 
           {Object.entries(MENU_DATA).map(([key, category]) => (
             <Tabs.Panel key={key} value={key}>
-              {/* Pengantar kategori. Foto bersifat mewakili golongan masakan,
-                  bukan mengklaim satu nama hidangan tertentu — sebagian foto
-                  belum terkonfirmasi namanya. Kategori tanpa foto tetap
-                  menampilkan keterangannya. */}
+              {/* Foto sampul mewakili golongan masakan, bukan satu hidangan tertentu. */}
               <AnimatedContent distance={24} duration={0.6}>
                 <div className="mb-9 flex items-center gap-5 border-b border-taupe pb-8 sm:gap-7">
                   {category.cover && (
@@ -212,7 +205,7 @@ export function Menu() {
                       duration={0.5}
                       className="h-full"
                     >
-                      <article className="group flex h-full flex-col justify-between rounded-2xl border border-taupe/70 bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-[0_12px_32px_-12px_rgba(35,28,24,0.18)]">
+                      <article className="flex h-full flex-col justify-between rounded-2xl border border-taupe/70 bg-white p-5">
                         <div className="flex items-start gap-4">
                           {item.photo && (
                             <Image
@@ -226,7 +219,7 @@ export function Menu() {
                           )}
                           <div className="min-w-0 flex-1">
                             <div className="flex items-start justify-between gap-3">
-                              <h3 className="text-serif-md text-charcoal transition-colors group-hover:text-coffee">
+                              <h3 className="text-serif-md text-charcoal">
                                 {item.name}
                               </h3>
                               <span className="text-price-tag tabular shrink-0 text-gold-deep">
@@ -254,7 +247,7 @@ export function Menu() {
         </Tabs.Root>
       </div>
 
-      <TornEdge color="#231c18" className="mt-20 md:mt-28" />
+      <TornEdge color="#231c18" className="mt-16 md:mt-28" />
     </section>
   );
 }

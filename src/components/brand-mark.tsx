@@ -7,14 +7,7 @@ interface BrandMarkProps {
   className?: string;
 }
 
-/**
- * Logo + wordmark BAKALKOPI.
- *
- * Satu sumber untuk navbar dan panel menu ponsel: dulu keduanya menulis
- * markup sendiri dengan ukuran, jarak, dan ring berbeda, sehingga logo
- * tampak melompat saat panel dibuka — paling kentara di tablet, di mana
- * navbar sudah memakai ukuran md: sedangkan panel tidak.
- */
+// Dipakai navbar dan panel menu ponsel agar logo tidak melompat saat panel dibuka.
 export function BrandMark({ tone, className = "" }: BrandMarkProps) {
   const onDark = tone === "dark";
 

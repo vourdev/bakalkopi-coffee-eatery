@@ -9,7 +9,7 @@ export function Ornament({ className = "" }: { className?: string }) {
   );
 }
 
-/** Daun garis tipis — aksen botani yang ditebar tipis seperti pada rujukan. */
+/** Daun garis tipis untuk aksen botani. */
 export function LeafMark({ className = "" }: { className?: string }) {
   return (
     <svg

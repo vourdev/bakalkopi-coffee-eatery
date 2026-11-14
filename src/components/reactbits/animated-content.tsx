@@ -1,12 +1,6 @@
 "use client";
 
-/**
- * AnimatedContent — port React Bits (reactbits.dev) dari GSAP ke `motion`.
- * Prop-nya sengaja dibuat sama dengan versi asli, kecuali `ease` yang di sini
- * berupa easing milik motion (array cubic-bezier), bukan string GSAP.
- * Alasan port: proyek ini sudah memakai motion untuk CountUp dan CircularText;
- * menarik gsap + ScrollTrigger hanya demi reveal saat scroll tidak sepadan.
- */
+// Port AnimatedContent dari React Bits ke `motion`; `ease` berupa cubic-bezier, bukan string GSAP.
 
 import { motion, useReducedMotion, type Easing } from "motion/react";
 import type { ReactNode } from "react";
@@ -21,7 +15,7 @@ interface AnimatedContentProps {
   initialOpacity?: number;
   animateOpacity?: boolean;
   scale?: number;
-  /** Bagian elemen yang harus terlihat sebelum animasi mulai (0–1). */
+  /** Bagian elemen yang harus terlihat sebelum animasi mulai (0-1). */
   threshold?: number;
   delay?: number;
   className?: string;

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Info, MapPin, Navigation, Phone } from "lucide-react";
+import { Clock, Info, MapPin, Phone } from "lucide-react";
 import AnimatedContent from "@/components/reactbits/animated-content";
 import { SectionHeading } from "@/components/section-heading";
 import { ADDRESS_LINE, HOURS_LINE, SITE, WA_RESERVASI } from "@/lib/site";
@@ -9,27 +9,18 @@ export function Lokasi() {
   return (
     <section
       id="lokasi"
-      className="relative overflow-hidden bg-charcoal py-20 text-cream-light md:py-28"
+      className="bg-charcoal py-16 text-cream-light md:py-28"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-40 -left-40 h-96 w-96 rounded-full bg-gold/10 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-40 -bottom-40 h-96 w-96 rounded-full bg-coffee/25 blur-3xl"
-      />
-
-      <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-10">
+      <div className="mx-auto max-w-7xl px-5 md:px-10">
         <SectionHeading
           tone="dark"
+          align="left"
           eyebrow="Kunjungi & Reservasi"
           title="Mampir. Duduk lama."
           script="Mejamu sudah menunggu"
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14">
-          {/* Kiri — keterangan praktis */}
+        <div className="mt-12 grid grid-cols-1 gap-12 md:mt-16 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-6">
             <AnimatedContent distance={26}>
               <div className="flex items-start gap-3 border-b border-cream-light/12 pb-7">
@@ -53,10 +44,7 @@ export function Lokasi() {
                     </h3>
                     <p className="text-body-md mt-2 text-taupe/85">{SITE.hours.label}</p>
                     <p className="text-headline-sm tabular mt-1 text-gold">{HOURS_LINE}</p>
-                    <span className="text-label-caps mt-3 inline-flex items-center gap-2 rounded-full border border-gold/35 px-3 py-1.5 text-gold">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                      Buka setiap hari
-                    </span>
+                    <p className="text-label-caps mt-3 text-gold-light">Buka setiap hari</p>
                   </div>
                 </div>
               </AnimatedContent>
@@ -73,7 +61,7 @@ export function Lokasi() {
                       href={WA_RESERVASI}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-headline-sm tabular mt-1 block text-gold hover:underline"
+                      className="text-headline-sm tabular mt-1 inline-flex min-h-11 items-center text-gold underline-offset-4 hover:underline active:opacity-70"
                     >
                       {SITE.contact.whatsappDisplay}
                     </Link>
@@ -81,7 +69,7 @@ export function Lokasi() {
                       href={SITE.contact.instagramUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-body-sm mt-2 inline-block text-taupe/65 hover:text-cream-light"
+                      className="text-body-sm inline-flex min-h-11 items-center text-taupe/70 hover:text-cream-light active:opacity-70"
                     >
                       Instagram @{SITE.contact.instagram}
                     </Link>
@@ -96,7 +84,7 @@ export function Lokasi() {
                   <Info className="h-4 w-4" strokeWidth={1.25} />
                   Aturan Rumah
                 </h3>
-                <p className="text-body-sm mt-3 text-taupe/65">
+                <p className="text-body-sm mt-3 text-taupe/70">
                   Makanan dan minuman 100% halal. Dilarang membawa makanan atau
                   minuman dari luar. Area ramah keluarga, dan ruang ber-AC bebas
                   asap rokok.
@@ -118,21 +106,16 @@ export function Lokasi() {
                   href={SITE.maps.directions}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-label-caps group inline-flex items-center justify-center gap-2.5 rounded-full border border-cream-light/25 px-8 py-4 text-cream-light transition-colors duration-300 hover:bg-cream-light/10 active:scale-95"
+                  className="text-label-caps inline-flex items-center justify-center rounded-full border border-cream-light/25 px-8 py-4 text-cream-light transition-colors duration-300 hover:bg-cream-light/10 active:scale-95"
                 >
                   Petunjuk Arah
-                  <Navigation
-                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                    strokeWidth={1.5}
-                  />
                 </Link>
               </div>
             </AnimatedContent>
           </div>
 
-          {/* Kanan — peta dan foto ruang */}
           <AnimatedContent className="lg:col-span-6" delay={0.15} distance={34}>
-            <div className="overflow-hidden rounded-[1.75rem] border border-gold/25 shadow-2xl">
+            <div className="overflow-hidden rounded-[1.75rem] border border-gold/25">
               <iframe
                 src={SITE.maps.embed}
                 title={`Peta lokasi ${SITE.name} di ${SITE.address.district}, ${SITE.address.city}`}
@@ -143,7 +126,7 @@ export function Lokasi() {
               />
             </div>
 
-            <div className="relative mt-5 overflow-hidden rounded-[1.75rem] border border-gold/20 shadow-2xl">
+            <div className="relative mt-5 overflow-hidden rounded-[1.75rem] border border-gold/20">
               <Image
                 src="/images/room-3.jpg"
                 alt="Teras terbuka BAKALKOPI pada siang hari dengan meja bundar dan tanaman hijau"
@@ -152,13 +135,12 @@ export function Lokasi() {
                 sizes="(min-width: 1024px) 38rem, 100vw"
                 className="h-[240px] w-full object-cover md:h-[280px]"
               />
-              {/* Foto teras siang hari terang; tirai perlu pekat sampai
-                  setengah tinggi agar keterangan tetap terbaca. */}
+              {/* Foto siang terang: tirai pekat sampai tengah agar keterangan terbaca. */}
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-transparent" />
               <div className="absolute inset-x-5 bottom-5">
-                <p className="text-label-caps text-gold">Ruang Bersama</p>
+                <p className="text-label-caps text-gold">Teras Terbuka</p>
                 <p className="text-serif-md mt-1.5 text-cream-light">
-                  Parkiran luas, Wi-Fi kencang, dan sambutan yang hangat.
+                  Meja bundar di antara tanaman hijau.
                 </p>
               </div>
             </div>

@@ -1,15 +1,4 @@
-/**
- * Tepi sobek organik — peralihan antarbagian.
- *
- * Kedua jalur dibangkitkan dengan derau terseed lalu dimuluskan sebagai
- * kurva Catmull-Rom, bukan ditulis tangan. Pola yang diketik manual selalu
- * jatuh ke irama seragam yang terbaca sebagai ombak atau gerigi perangko,
- * sementara ruas lurus bersudut membuat tepinya terasa kasar.
- *
- * Soal garis rambut: jalur dilebihkan melewati batas viewBox dan pembungkus
- * mendatar menimpa satu piksel ke bagian berikutnya. Tanpa keduanya antialias
- * menyisakan baris setengah transparan yang terlihat saat diperbesar.
- */
+// Jalur dilebihkan melewati viewBox dan -mb-px menimpa satu piksel, agar antialias tidak meninggalkan garis rambut.
 
 interface TornEdgeProps {
   /** Warna bidang di SISI YANG DITUJU, bukan warna latar di belakangnya. */
@@ -38,6 +27,3 @@ export function TornEdge({ color = "#f1eade", className = "" }: TornEdgeProps) {
     </div>
   );
 }
-
-
-

@@ -6,58 +6,52 @@ import { TornEdge } from "@/components/torn-edge";
 const AMENITIES = [
   {
     Icon: Wifi,
-    title: "Wi-Fi Kencang",
-    desc: "Fiber 100+ Mbps untuk kerja jarak jauh dan belajar",
+    title: "Wi-Fi",
+    desc: "Tersedia untuk tamu yang datang bekerja atau belajar",
   },
   {
     Icon: Car,
     title: "Parkiran Luas",
-    desc: "Lahan khusus untuk mobil dan motor, gratis",
+    desc: "Lahan parkir untuk mobil dan motor",
   },
   {
     Icon: TreePalm,
     title: "Teras Terbuka",
-    desc: "Taman terbuka dengan angin sore dan tanaman hijau",
+    desc: "Meja di udara terbuka, dikelilingi tanaman tropis",
   },
   {
     Icon: AirVent,
     title: "Ruang Ber-AC",
-    desc: "Suhu nyaman dengan tempat duduk yang melegakan",
+    desc: "Ruang dalam berpendingin dengan kursi booth",
   },
   {
     Icon: ShieldCheck,
-    title: "100% Halal",
-    desc: "Bahan halal sepenuhnya, tanpa babi maupun lemak babi",
+    title: "Bersertifikat Halal",
+    desc: "Tanpa babi maupun lemak babi di seluruh dapur",
   },
   {
     Icon: Music2,
     title: "Panggung Akustik",
-    desc: "Pertunjukan musik pada malam akhir pekan",
+    desc: "Musisi tampil akustik di teras",
   },
 ];
 
 export function Amenities() {
   return (
-    <section id="fasilitas" className="bg-cream pt-20 md:pt-24">
+    <section id="fasilitas" className="bg-cream pt-16 md:pt-24">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <SectionHeading
           eyebrow="Fasilitas"
           title="Dirancang supaya betah"
           script="Kenyamanan yang sederhana"
-          description="Setiap sudut BAKALKOPI disiapkan untuk bekerja, bersantai, dan berkumpul."
         />
 
-        <ul className="mt-14 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 md:mt-14 lg:grid-cols-3">
           {AMENITIES.map(({ Icon, title, desc }, i) => (
             <li key={title}>
               <AnimatedContent delay={i * 0.06} distance={24}>
-                {/* Garis rambut di atas tiap butir, bukan kotak kartu —
-                    lebih dekat ke bilah fasilitas pada rujukan desain. */}
-                <div className="group flex items-start gap-4 border-t border-taupe pt-5">
-                  <Icon
-                    className="mt-0.5 h-6 w-6 shrink-0 text-coffee transition-colors duration-300 group-hover:text-gold"
-                    strokeWidth={1}
-                  />
+                <div className="flex items-start gap-4 border-t border-taupe pt-5">
+                  <Icon className="mt-0.5 h-6 w-6 shrink-0 text-coffee" strokeWidth={1} />
                   <div>
                     <h3 className="text-label-caps text-charcoal">{title}</h3>
                     <p className="text-body-sm mt-2 text-charcoal/70">{desc}</p>
@@ -69,7 +63,7 @@ export function Amenities() {
         </ul>
       </div>
 
-      <TornEdge color="#231c18" className="mt-20 md:mt-24" />
+      <TornEdge color="#231c18" className="mt-16 md:mt-24" />
     </section>
   );
 }

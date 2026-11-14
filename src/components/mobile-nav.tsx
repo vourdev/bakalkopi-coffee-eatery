@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BrandMark } from "@/components/brand-mark";
 import { Dialog } from "@base-ui/react/dialog";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowUpRight, Clock, Menu as MenuIcon, Phone, X } from "lucide-react";
+import { Clock, Menu as MenuIcon, Phone, X } from "lucide-react";
 import { HOURS_LINE, SITE, WA_RESERVASI } from "@/lib/site";
 
 interface MobileNavProps {
@@ -14,16 +14,7 @@ interface MobileNavProps {
   onDark: boolean;
 }
 
-/**
- * Menu layar penuh untuk ponsel.
- *
- * Menggantikan panel geser selebar 20rem: di layar sempit panel itu menyisakan
- * potongan halaman di sampingnya yang membuat menunya terasa sesak, dan
- * ukuran tautannya mengikuti teks isi, bukan ukuran sasaran sentuh.
- *
- * Tiap tautan muncul bertahap; seluruh animasi dimatikan saat
- * prefers-reduced-motion aktif.
- */
+// Menu layar penuh untuk ponsel; animasi dimatikan saat prefers-reduced-motion.
 export function MobileNav({ links, activeId, onDark }: MobileNavProps) {
   const reduceMotion = useReducedMotion();
 
@@ -45,30 +36,29 @@ export function MobileNav({ links, activeId, onDark }: MobileNavProps) {
       <Dialog.Trigger
         aria-label="Buka menu navigasi"
         className={[
-          "grid h-10 w-10 cursor-pointer place-items-center rounded-md transition-colors lg:hidden",
+          "text-label-caps inline-flex h-11 cursor-pointer items-center gap-2 rounded-full px-3 transition-colors active:scale-95 lg:hidden",
           onDark
             ? "text-cream-light hover:bg-cream-light/10"
             : "text-charcoal hover:bg-taupe/30",
         ].join(" ")}
       >
         <MenuIcon className="h-5 w-5" strokeWidth={1.5} />
+        Menu
       </Dialog.Trigger>
 
       <Dialog.Portal>
-        <Dialog.Backdrop className="fixed inset-0 z-[70] bg-charcoal/40 backdrop-blur-sm" />
+        <Dialog.Backdrop className="fixed inset-0 z-[70] bg-charcoal" />
         <Dialog.Popup className="fixed inset-0 z-[70] flex flex-col overflow-y-auto bg-charcoal text-cream-light">
           <Dialog.Title className="sr-only">Menu navigasi</Dialog.Title>
 
-          {/* Kepala panel meniru geometri bar navigasi (tinggi, padding, lebar
-              maksimum) supaya logo dan tombol tutup berada tepat di posisi
-              logo dan tombol pemicu — tidak melompat saat panel dibuka. */}
+          {/* Geometri sama dengan navbar agar logo dan tombol tidak melompat saat dibuka. */}
           <div className="pt-[env(safe-area-inset-top)]">
-            <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 md:px-10">
+            <div className="mx-auto flex h-16 w-full max-w-7xl md:h-20 items-center justify-between px-5 md:px-10">
               <BrandMark tone="dark" />
 
               <Dialog.Close
                 aria-label="Tutup menu"
-                className="grid h-10 w-10 cursor-pointer place-items-center rounded-md text-cream-light transition-colors hover:bg-cream-light/10"
+                className="grid h-11 w-11 cursor-pointer place-items-center rounded-full text-cream-light transition-colors hover:bg-cream-light/10 active:scale-95"
               >
                 <X className="h-5 w-5" strokeWidth={1.5} />
               </Dialog.Close>
@@ -86,13 +76,10 @@ export function MobileNav({ links, activeId, onDark }: MobileNavProps) {
                       <Link
                         href={link.href}
                         aria-current={isActive ? "true" : undefined}
-                        className="group flex w-full items-center gap-4 border-b border-cream-light/10 py-3.5"
+                        className="flex w-full items-center border-b border-cream-light/10 py-3.5 active:opacity-70"
                       />
                     }
                   >
-                    <span className="text-label-caps w-6 shrink-0 text-gold-light/70">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
                     <span
                       className={[
                         "font-display flex-1 text-left text-2xl tracking-[0.02em] uppercase transition-colors",
@@ -101,10 +88,6 @@ export function MobileNav({ links, activeId, onDark }: MobileNavProps) {
                     >
                       {link.label}
                     </span>
-                    <ArrowUpRight
-                      className="h-4 w-4 shrink-0 text-cream-light/35 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      strokeWidth={1.5}
-                    />
                   </Dialog.Close>
                 </motion.div>
               );
@@ -125,7 +108,7 @@ export function MobileNav({ links, activeId, onDark }: MobileNavProps) {
               href={WA_RESERVASI}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-label-caps flex items-center justify-center rounded-md bg-gold px-6 py-4 text-charcoal transition-colors duration-200 hover:bg-gold-light active:scale-95"
+              className="text-label-caps flex items-center justify-center rounded-full bg-gold px-6 py-4 text-charcoal transition-colors duration-200 hover:bg-gold-light active:scale-95"
             >
               Pesan Meja
             </Link>
