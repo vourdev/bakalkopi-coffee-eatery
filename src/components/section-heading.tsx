@@ -3,8 +3,8 @@ import AnimatedContent from "@/components/reactbits/animated-content";
 import { Ornament } from "@/components/ornament";
 
 interface SectionHeadingProps {
-  /** Label kecil huruf kapital di atas judul. */
-  eyebrow: string;
+  /** Label kapital di atas judul. Maksimal 3 di seluruh halaman: Hero, Menu, Lokasi. */
+  eyebrow?: string;
   title: ReactNode;
   /** Baris aksen tulisan tangan di bawah judul. */
   script?: string;
@@ -34,21 +34,23 @@ export function SectionHeading({
         className,
       ].join(" ")}
     >
-      <span
-        className={[
-          "flex items-center gap-3 text-label-caps",
-          onDark ? "text-gold-light" : "text-gold-deep",
-        ].join(" ")}
-      >
-        {centered && <Ornament />}
-        {eyebrow}
-        {centered && <Ornament />}
-        {!centered && <span aria-hidden="true" className="h-px w-10 bg-current opacity-50" />}
-      </span>
+      {eyebrow && (
+        <span
+          className={[
+            "mb-4 flex items-center gap-3 text-label-caps",
+            onDark ? "text-gold-light" : "text-gold-deep",
+          ].join(" ")}
+        >
+          {centered && <Ornament />}
+          {eyebrow}
+          {centered && <Ornament />}
+          {!centered && <span aria-hidden="true" className="h-px w-10 bg-current opacity-50" />}
+        </span>
+      )}
 
       <h2
         className={[
-          "text-headline-lg mt-4",
+          "text-headline-lg",
           onDark ? "text-cream-light" : "text-charcoal",
         ].join(" ")}
       >

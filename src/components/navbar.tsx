@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useMotionValueEvent, useScroll } from "motion/react";
 import { BrandMark } from "@/components/brand-mark";
 import { MobileNav } from "@/components/mobile-nav";
 import { SITE, WA_RESERVASI } from "@/lib/site";
@@ -48,13 +49,10 @@ function useActiveSection(ids: readonly string[]) {
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const active = useActiveSection(SECTION_IDS);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // React melewati render bila boolean sama, jadi tiap frame gulir tidak me-render ulang.
+  useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 12));
 
   // Bening di atas hero gelap; krem pekat begitu digulir karena sisa halaman terang.
   const solid = scrolled;

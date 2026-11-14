@@ -100,7 +100,7 @@ export function Lokasi() {
                   rel="noopener noreferrer"
                   className="text-label-caps inline-flex items-center justify-center rounded-full bg-gold px-8 py-4 text-charcoal transition-colors duration-300 hover:bg-gold-light active:scale-95"
                 >
-                  Reservasi via WhatsApp
+                  Pesan Meja
                 </Link>
                 <Link
                   href={SITE.maps.directions}

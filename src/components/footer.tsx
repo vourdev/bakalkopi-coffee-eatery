@@ -13,26 +13,6 @@ const EXPLORE_LINKS = [
   { label: "Fasilitas", href: "#fasilitas" },
 ];
 
-/** lucide-react 1.x tidak menyertakan ikon merek. */
-function InstagramGlyph({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.25"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" />
-    </svg>
-  );
-}
-
 export function Footer() {
   const year = new Date().getFullYear();
 
@@ -104,9 +84,10 @@ export function Footer() {
               href={SITE.contact.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-body-sm flex min-h-11 items-center gap-2.5 text-gold transition-colors hover:text-gold-light active:opacity-70"
+              className="text-body-sm flex min-h-11 items-center text-gold transition-colors hover:text-gold-light active:opacity-70"
             >
-              <InstagramGlyph className="h-4 w-4 shrink-0" />@{SITE.contact.instagram}
+              {/* lucide-react 1.x tanpa ikon merek; nama platform ditulis, bukan glyph buatan tangan. */}
+              Instagram @{SITE.contact.instagram}
             </Link>
           </div>
         </div>

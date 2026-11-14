@@ -37,7 +37,6 @@ export function Experience() {
           <SectionHeading
             tone="dark"
             align="left"
-            eyebrow="Suasana"
             title="Setiap malam terasa seperti rumah"
             script="Duduk lama pun tak apa"
             description="Teras dengan lampu untaian dan musik akustik, ruang dalam dengan lampu gantung dan kursi booth."

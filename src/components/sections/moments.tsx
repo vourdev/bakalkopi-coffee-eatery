@@ -35,7 +35,6 @@ export function Moments() {
     <section className="bg-cream py-16 text-charcoal md:py-24">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <SectionHeading
-          eyebrow="Momen BAKALKOPI"
           title="Cocok untuk segala waktu"
           script="Dari pagi sampai lampu padam"
         />

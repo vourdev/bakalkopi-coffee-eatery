@@ -50,20 +50,29 @@ Angka harga memakai `.tabular`.
 
 - **Tombol dan tautan aksi**: kapsul penuh (`rounded-full`), sasaran sentuh
   minimal 44px. Aksi utama berisi warna; aksi sekunder garis tepi atau garis
-  bawah. Hanya tombol "Lihat Menu Kami" di hero yang memakai panah.
+  bawah. Hanya tombol "Lihat Menu" di hero yang memakai panah.
+- **Label aksi**: satu niat, satu label. "Pesan Meja" untuk semua tautan
+  reservasi WhatsApp (header, menu ponsel, Lokasi); "Lihat Menu" untuk semua
+  tautan ke `#menu` (hero, Favorit).
+- **Label di atas foto**: tidak ada pil di atas gambar. Label hidangan
+  ("Favorit", "Warisan") ditaruh di bawah foto.
 - **Kartu**: sudut `1rem` sampai `2rem`, latar putih di atas krem, garis rambut
   `taupe`, tanpa bayangan dan tanpa efek angkat saat ditunjuk (kartu menu tidak
   bisa diklik). Bayangan hanya untuk elemen yang benar-benar bertumpuk: kartu
   mural di Cerita dan tombol putar video.
 - **Kaca (blur)**: hanya header saat digulir. Tidak ada blur lain.
-- **Ikon**: seluruhnya `lucide-react` dengan `strokeWidth` 1 sampai 1.5. Glif
-  Instagram ditulis tangan di [footer.tsx](src/components/footer.tsx) karena
-  lucide 1.x tidak memuat ikon merek.
+- **Ikon**: seluruhnya `lucide-react` dengan `strokeWidth` 1 sampai 1.5. Tidak
+  ada ikon SVG buatan tangan. Lucide 1.x tidak memuat ikon merek, jadi tautan
+  Instagram di footer ditulis sebagai teks ("Instagram @bakalkopi.id").
 - **Peralihan bagian**: [`TornEdge`](src/components/torn-edge.tsx), tepi sobek
   yang kurvanya tidak berulang.
 - **Judul bagian**: [`SectionHeading`](src/components/section-heading.tsx).
   Rata tengah di bagian terang, rata kiri di bagian gelap (Suasana, Lokasi)
-  agar irama halaman tidak seragam.
+  agar irama halaman tidak seragam. Eyebrow (label kapital di atas judul)
+  hanya di tiga tempat: Hero, Menu, Lokasi. Bagian lain langsung dibuka judul.
+- **Hero**: eyebrow, H1 dua baris (kalimat terakhir slogan berdiri sendiri;
+  di ponsel putus per kalimat), satu paragraf, dua aksi. Tidak ada strip fakta
+  di bawah tombol. Tinggi `min-h-dvh`.
 
 ## 4. Tata letak
 
@@ -88,6 +97,9 @@ Satu pustaka saja: **`motion`**. Komponen dari
 | --- | --- |
 | `AnimatedContent` | Port dari GSAP ke motion, prop sama |
 | `SplitText` | Port dari GSAP ke motion, prop sama |
+
+Status gulir header dibaca lewat `useScroll` + `useMotionValueEvent`, bukan
+`window.addEventListener("scroll")`.
 
 Gerak hanya sekali jalan saat bagian masuk layar. Tidak ada animasi berulang
 tanpa akhir: segel berputar di hero dan pita teks berjalan sudah dicabut.

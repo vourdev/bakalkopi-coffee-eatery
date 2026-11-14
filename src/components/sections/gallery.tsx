@@ -51,7 +51,6 @@ export function Gallery() {
     <section id="galeri" className="bg-cream-light py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <SectionHeading
-          eyebrow="Galeri"
           title="Sudut BAKALKOPI"
           script="Sudut demi sudut"
         />

@@ -41,7 +41,6 @@ export function Amenities() {
     <section id="fasilitas" className="bg-cream pt-16 md:pt-24">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <SectionHeading
-          eyebrow="Fasilitas"
           title="Dirancang supaya betah"
           script="Kenyamanan yang sederhana"
         />

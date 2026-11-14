@@ -12,12 +12,7 @@ export function Story() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
             <AnimatedContent distance={26}>
-              <span className="text-label-caps flex items-center gap-3 text-gold-deep">
-                Cerita Kami
-                <span aria-hidden="true" className="h-px w-10 bg-current opacity-50" />
-              </span>
-
-              <h2 className="text-headline-lg mt-4 text-charcoal">
+              <h2 className="text-headline-lg text-charcoal">
                 Lebih dari
                 <br />
                 sekadar kopi

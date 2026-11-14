@@ -4,21 +4,25 @@ import { ArrowRight } from "lucide-react";
 import AnimatedContent from "@/components/reactbits/animated-content";
 import SplitText from "@/components/reactbits/split-text";
 import { TornEdge } from "@/components/torn-edge";
-import { HOURS_LINE, SITE } from "@/lib/site";
+import { SITE } from "@/lib/site";
 
-const FACTS = [`Buka tiap hari ${HOURS_LINE}`, "Parkiran luas"];
-
-// Slogan dipenggal per kalimat. Regex, bukan lookbehind, agar jalan di Safari lama.
-const HEADLINE_LINES = (SITE.headline.match(/[^.]+\./g) ?? [SITE.headline]).map(
-  (line) => line.trim()
+// Regex, bukan lookbehind, agar jalan di Safari lama. NBSP: baris sempit hanya putus antar-kalimat.
+const SENTENCES = (SITE.headline.match(/[^.]+\./g) ?? [SITE.headline]).map((s) =>
+  s.trim().replaceAll(" ", "\u00a0")
 );
+
+// Dua baris: kalimat terakhir berdiri sendiri.
+const HEADLINE_LINES =
+  SENTENCES.length > 1
+    ? [SENTENCES.slice(0, -1).join(" "), SENTENCES[SENTENCES.length - 1]]
+    : SENTENCES;
 
 export function Hero() {
   return (
-    // Ditarik ke bawah header bening; svh agar bilah alamat ponsel tidak memotong dasar hero.
+    // Ditarik ke bawah header bening; dvh mengikuti bilah alamat ponsel yang muncul-hilang.
     <section
       id="beranda"
-      className="relative -mt-[calc(4rem+1px)] flex min-h-[100svh] flex-col overflow-hidden bg-charcoal md:-mt-[calc(5rem+1px)]"
+      className="relative -mt-[calc(4rem+1px)] flex min-h-dvh flex-col overflow-hidden bg-charcoal md:-mt-[calc(5rem+1px)]"
     >
       <Image
         src="/images/BakalKopi-home.jpg"
@@ -41,7 +45,7 @@ export function Hero() {
       />
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pt-[calc(4rem+2.5rem)] pb-10 md:px-10 md:pt-[calc(5rem+2.5rem)]">
-        <div className="w-full max-w-2xl">
+        <div className="w-full max-w-4xl">
           <AnimatedContent distance={20} duration={0.6}>
             <p className="text-label-caps text-gold-light">Cimanggis, Depok</p>
           </AnimatedContent>
@@ -69,7 +73,7 @@ export function Hero() {
                 href="#menu"
                 className="text-label-caps group inline-flex items-center gap-3 rounded-full bg-coffee px-8 py-4 text-cream-light transition-colors duration-300 hover:bg-gold active:scale-95"
               >
-                Lihat Menu Kami
+                Lihat Menu
                 <ArrowRight
                   className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                   strokeWidth={1.5}
@@ -83,20 +87,6 @@ export function Hero() {
                 Lihat Cerita Kami
               </Link>
             </div>
-          </AnimatedContent>
-
-          <AnimatedContent delay={0.5} distance={18}>
-            <ul className="hero-collapsible mt-10 flex flex-wrap gap-x-7 gap-y-2.5 border-t border-cream-light/15 pt-6">
-              {FACTS.map((fact) => (
-                <li
-                  key={fact}
-                  className="text-label-caps flex items-center gap-2 text-cream-light/70"
-                >
-                  <span aria-hidden="true" className="h-1 w-1 rotate-45 bg-gold" />
-                  {fact}
-                </li>
-              ))}
-            </ul>
           </AnimatedContent>
         </div>
       </div>

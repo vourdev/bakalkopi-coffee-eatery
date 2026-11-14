@@ -167,7 +167,9 @@
 .text-script {
   font-family: var(--font-script);
   font-weight: 400;
-  line-height: 1.1;
+  /* 1.25 + bantalan bawah: ekor huruf skrip (g, p, y) tidak terpotong. */
+  line-height: 1.25;
+  padding-bottom: 0.25rem;
   letter-spacing: 0.01em;
 }
 /* Teks isi minimal 16px, pendamping 15px, agar menu terbaca di ponsel. */
@@ -214,7 +216,7 @@
 /* Hero ikut tinggi viewport juga, agar layar pendek-tapi-lebar tidak meluber. */
 .hero-display {
   font-family: var(--font-display);
-  /* 3.75rem: batas agar "GOOD MOMENTS." muat satu baris di max-w-2xl. */
+  /* 3.75rem di max-w-4xl: "GOOD FOOD. GOOD COFFEE." muat satu baris mulai md. */
   font-size: clamp(1.75rem, min(5.2vw, 7svh), 3.75rem);
   font-weight: 500;
   line-height: 1.05;
@@ -226,12 +228,6 @@
   font-size: clamp(0.875rem, 1.85svh, 1.0625rem);
   font-weight: 400;
   line-height: 1.6;
-}
-/* Layar sangat pendek: daftar fakta hero disembunyikan agar isi utama muat. */
-@media (max-height: 780px) {
-  .hero-collapsible {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
