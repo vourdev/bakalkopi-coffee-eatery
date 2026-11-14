@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Clock, Info, MapPin, Phone } from "lucide-react";
 import AnimatedContent from "@/components/reactbits/animated-content";
 import { SectionHeading } from "@/components/section-heading";
+import { FillButton } from "@/components/ui/fill-button";
 import { ADDRESS_LINE, HOURS_LINE, SITE, WA_RESERVASI } from "@/lib/site";
 
 export function Lokasi() {
@@ -94,22 +95,24 @@ export function Lokasi() {
 
             <AnimatedContent delay={0.26} distance={22}>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
+                <FillButton
                   href={WA_RESERVASI}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-label-caps inline-flex items-center justify-center rounded-full bg-gold px-8 py-4 text-charcoal transition-colors duration-300 hover:bg-gold-light active:scale-95"
+                  className="text-label-caps rounded-full bg-gold px-8 py-4 text-charcoal active:scale-95"
+                  fillClassName="bg-cream-light text-charcoal"
                 >
                   Pesan Meja
-                </Link>
-                <Link
+                </FillButton>
+                <FillButton
                   href={SITE.maps.directions}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-label-caps inline-flex items-center justify-center rounded-full border border-cream-light/25 px-8 py-4 text-cream-light transition-colors duration-300 hover:bg-cream-light/10 active:scale-95"
+                  className="text-label-caps rounded-full border border-cream-light/25 px-8 py-4 text-cream-light active:scale-95"
+                  fillClassName="bg-cream-light text-charcoal"
                 >
                   Petunjuk Arah
-                </Link>
+                </FillButton>
               </div>
             </AnimatedContent>
           </div>

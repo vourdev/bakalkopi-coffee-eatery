@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import AnimatedContent from "@/components/reactbits/animated-content";
 import SplitText from "@/components/reactbits/split-text";
 import { TornEdge } from "@/components/torn-edge";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { SITE } from "@/lib/site";
 
 // Regex, bukan lookbehind, agar jalan di Safari lama. NBSP: baris sempit hanya putus antar-kalimat.
@@ -68,17 +68,13 @@ export function Hero() {
 
           <AnimatedContent delay={0.4} distance={18}>
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              {/* Satu-satunya panah di halaman: penanda aksi utama. */}
-              <Link
+              {/* Satu-satunya tombol berpanah di halaman; isi emas memakai teks gelap agar kontras >= 4.5:1. */}
+              <InteractiveHoverButton
                 href="#menu"
-                className="text-label-caps group inline-flex items-center gap-3 rounded-full bg-coffee px-8 py-4 text-cream-light transition-colors duration-300 hover:bg-gold active:scale-95"
-              >
-                Lihat Menu
-                <ArrowRight
-                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                  strokeWidth={1.5}
-                />
-              </Link>
+                text="Lihat Menu"
+                className="text-label-caps rounded-full bg-coffee px-8 py-4 text-cream-light active:scale-95"
+                fillClassName="bg-gold text-charcoal"
+              />
 
               <Link
                 href="#cerita"

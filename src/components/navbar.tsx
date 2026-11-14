@@ -2,9 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useMotionValueEvent, useScroll } from "motion/react";
+import {
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from "motion/react";
 import { BrandMark } from "@/components/brand-mark";
 import { MobileNav } from "@/components/mobile-nav";
+import { FillButton } from "@/components/ui/fill-button";
 import { SITE, WA_RESERVASI } from "@/lib/site";
 
 const NAV_LINKS = [
@@ -54,11 +60,18 @@ export function Navbar() {
   // React melewati render bila boolean sama, jadi tiap frame gulir tidak me-render ulang.
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 12));
 
+  // Garis bawah mengikuti tautan yang ditunjuk, lalu kembali ke bagian aktif.
+  const [hovered, setHovered] = useState<string | null>(null);
+  const reduceMotion = useReducedMotion();
+  const indicatorId = hovered ?? active;
+
   // Bening di atas hero gelap; krem pekat begitu digulir karena sisa halaman terang.
   const solid = scrolled;
 
   return (
-    <header
+    // layoutRoot: header sticky, jadi animasi garis diukur relatif ke header, bukan halaman.
+    <motion.header
+      layoutRoot
       className={[
         "sticky top-0 z-50 w-full transition-all duration-300",
         solid
@@ -71,13 +84,21 @@ export function Navbar() {
           <BrandMark tone={solid ? "light" : "dark"} />
         </Link>
 
-        <nav className="hidden items-center gap-9 lg:flex">
+        <nav
+          className="hidden items-center gap-9 lg:flex"
+          onMouseLeave={() => setHovered(null)}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget)) setHovered(null);
+          }}
+        >
           {NAV_LINKS.map((link) => {
             const isActive = active === link.id;
             return (
               <Link
                 key={link.href}
                 href={link.href}
+                onMouseEnter={() => setHovered(link.id)}
+                onFocus={() => setHovered(link.id)}
                 aria-current={isActive ? "true" : undefined}
                 className={[
                   "text-label-caps relative py-1 transition-colors duration-200",
@@ -91,37 +112,48 @@ export function Navbar() {
                 ].join(" ")}
               >
                 {link.label}
-                <span
-                  aria-hidden="true"
-                  className={[
-                    "absolute -bottom-0.5 left-0 h-px transition-all duration-300",
-                    solid ? "bg-gold" : "bg-gold-light",
-                    isActive ? "w-full opacity-100" : "w-0 opacity-0",
-                  ].join(" ")}
-                />
+                {indicatorId === link.id && (
+                  <motion.span
+                    layoutId="nav-indicator"
+                    aria-hidden="true"
+                    className={[
+                      "absolute -bottom-0.5 left-0 h-px w-full",
+                      solid ? "bg-gold" : "bg-gold-light",
+                    ].join(" ")}
+                    transition={
+                      reduceMotion
+                        ? { duration: 0 }
+                        : { type: "spring", stiffness: 420, damping: 36 }
+                    }
+                  />
+                )}
               </Link>
             );
           })}
         </nav>
 
         <div className="flex items-center gap-1.5">
-          <Link
-            href={WA_RESERVASI}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={[
-              "text-label-caps hidden min-h-11 items-center rounded-full px-6 py-3 transition-colors duration-200 active:scale-95 sm:inline-flex",
-              solid
-                ? "bg-charcoal text-cream-light hover:bg-coffee"
-                : "border border-cream-light/45 text-cream-light hover:border-gold hover:bg-gold/15",
-            ].join(" ")}
-          >
-            Pesan Meja
-          </Link>
+          {/* Pembungkus memegang hidden/sm:flex agar tidak bentrok dengan inline-flex tombol. */}
+          <div className="hidden sm:flex">
+            <FillButton
+              href={WA_RESERVASI}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={[
+                "text-label-caps min-h-11 rounded-full px-6 py-3 transition-colors duration-200 active:scale-95",
+                solid
+                  ? "bg-charcoal text-cream-light"
+                  : "border border-cream-light/45 text-cream-light",
+              ].join(" ")}
+              fillClassName={solid ? "bg-coffee text-cream-light" : "bg-gold text-charcoal"}
+            >
+              Pesan Meja
+            </FillButton>
+          </div>
 
           <MobileNav links={NAV_LINKS} activeId={active} onDark={!solid} />
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

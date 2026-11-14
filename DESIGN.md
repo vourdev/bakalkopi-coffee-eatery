@@ -50,7 +50,11 @@ Angka harga memakai `.tabular`.
 
 - **Tombol dan tautan aksi**: kapsul penuh (`rounded-full`), sasaran sentuh
   minimal 44px. Aksi utama berisi warna; aksi sekunder garis tepi atau garis
-  bawah. Hanya tombol "Lihat Menu" di hero yang memakai panah.
+  bawah. Hanya tombol "Lihat Menu" di hero yang memakai panah, lewat
+  [`InteractiveHoverButton`](src/components/ui/interactive-hover-button.tsx)
+  (mekar melingkar + geser label). Tombol kapsul tanpa panah di desktop memakai
+  [`FillButton`](src/components/ui/fill-button.tsx) (sapuan `clip-path` dari
+  bawah). Keduanya hanya aktif untuk mouse dan `:focus-visible`.
 - **Label aksi**: satu niat, satu label. "Pesan Meja" untuk semua tautan
   reservasi WhatsApp (header, menu ponsel, Lokasi); "Lihat Menu" untuk semua
   tautan ke `#menu` (hero, Favorit).
@@ -99,7 +103,9 @@ Satu pustaka saja: **`motion`**. Komponen dari
 | `SplitText` | Port dari GSAP ke motion, prop sama |
 
 Status gulir header dibaca lewat `useScroll` + `useMotionValueEvent`, bukan
-`window.addEventListener("scroll")`.
+`window.addEventListener("scroll")`. Garis bawah navigasi desktop memakai
+`layoutId` di dalam `<motion.header layoutRoot>`, jadi meluncur mengikuti
+tautan yang di-hover atau difokus lalu kembali ke bagian aktif.
 
 Gerak hanya sekali jalan saat bagian masuk layar. Tidak ada animasi berulang
 tanpa akhir: segel berputar di hero dan pita teks berjalan sudah dicabut.

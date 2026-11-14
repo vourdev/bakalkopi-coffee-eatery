@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import AnimatedContent from "@/components/reactbits/animated-content";
 import { SectionHeading } from "@/components/section-heading";
+import { FillButton } from "@/components/ui/fill-button";
 
 // Harga harus selaras dengan MENU_DATA di menu.tsx.
 const FAVORITES = [
@@ -83,12 +83,13 @@ export function Favorites() {
         </div>
 
         <AnimatedContent delay={0.15} className="mt-14 flex justify-center">
-          <Link
+          <FillButton
             href="#menu"
-            className="text-label-caps inline-flex items-center rounded-full border border-charcoal/25 px-8 py-4 text-charcoal transition-colors duration-300 hover:border-charcoal hover:bg-charcoal hover:text-cream-light active:scale-95"
+            className="text-label-caps rounded-full border border-charcoal/25 px-8 py-4 text-charcoal transition-colors duration-300 hover:border-charcoal active:scale-95"
+            fillClassName="bg-charcoal text-cream-light"
           >
             Lihat Menu
-          </Link>
+          </FillButton>
         </AnimatedContent>
       </div>
     </section>
