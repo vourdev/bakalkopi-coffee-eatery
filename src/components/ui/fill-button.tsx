@@ -24,8 +24,8 @@ const HIDDEN: Record<FillDirection, string> = {
 };
 const SHOWN = "inset(0% 0% 0% 0%)";
 
-// Kurva setara "power3.out" milik GSAP.
-const POWER3_OUT: Transition["ease"] = [0.215, 0.61, 0.355, 1];
+// Kurva lembut agar sapuan isi tidak menyentak di awal.
+const EASE_SMOOTH: Transition["ease"] = [0.4, 0, 0.2, 1];
 
 type Managed =
   | "children"
@@ -42,7 +42,7 @@ interface FillOptions {
   fillClassName: string;
   /** Arah sapuan isi. Bawaan: "up". */
   direction?: FillDirection;
-  /** Lama sapuan dalam detik. Bawaan: 0.45. */
+  /** Lama sapuan dalam detik. Bawaan: 0.65. */
   duration?: number;
   ease?: Transition["ease"];
 }
@@ -58,8 +58,8 @@ export function FillButton({
   className,
   fillClassName,
   direction = "up",
-  duration = 0.45,
-  ease = POWER3_OUT,
+  duration = 0.65,
+  ease = EASE_SMOOTH,
   ...rest
 }: FillButtonProps) {
   const [filled, setFilled] = useState(false);

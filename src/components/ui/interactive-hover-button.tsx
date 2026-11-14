@@ -13,7 +13,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion, type Transition } from "motion/react";
 
-const EASE_OUT: Transition["ease"] = [0.22, 1, 0.36, 1];
+// Kurva lembut tanpa sentakan awal agar mekar dan geser teks terasa tenang.
+const EASE_SMOOTH: Transition["ease"] = [0.4, 0, 0.2, 1];
 
 type Managed =
   | "children"
@@ -44,12 +45,15 @@ export function InteractiveHoverButton({
   text,
   className,
   fillClassName,
-  duration = 0.42,
+  duration = 0.7,
   ...rest
 }: InteractiveHoverButtonProps) {
   const [active, setActive] = useState(false);
   const reduceMotion = useReducedMotion();
-  const t: Transition = { duration: reduceMotion ? 0 : duration, ease: EASE_OUT };
+  const t: Transition = {
+    duration: reduceMotion ? 0 : duration,
+    ease: EASE_SMOOTH,
+  };
 
   const handlers = {
     // Hanya tetikus: ketukan layar sentuh tidak meninggalkan tombol dalam keadaan terisi.
@@ -72,7 +76,7 @@ export function InteractiveHoverButton({
         className="inline-flex items-center gap-3"
         initial={false}
         animate={{
-          x: active && !reduceMotion ? 24 : 0,
+          x: active && !reduceMotion ? 16 : 0,
           opacity: active ? 0 : 1,
         }}
         transition={t}
@@ -81,14 +85,14 @@ export function InteractiveHoverButton({
         <ArrowRight className="h-4 w-4 shrink-0" strokeWidth={1.5} />
       </motion.span>
 
-      {/* Lapisan isi mekar dari sisi kiri sambil menggeser label + panah masuk dari kanan. */}
+      {/* Pusat tetap di 18% dan radius 86% pas dengan tepi kanan pil, jadi tidak ada gerak terbuang di luar overflow. */}
       <motion.span
         aria-hidden="true"
         className={`pointer-events-none absolute inset-0 flex items-center justify-center ${fillClassName}`}
         initial={false}
         animate={{
           clipPath: active
-            ? "circle(140% at 50% 50%)"
+            ? "circle(86% at 18% 50%)"
             : "circle(0% at 18% 50%)",
         }}
         transition={t}
@@ -97,7 +101,7 @@ export function InteractiveHoverButton({
           className="inline-flex items-center gap-3"
           initial={false}
           animate={{
-            x: active || reduceMotion ? 0 : 24,
+            x: active || reduceMotion ? 0 : 16,
             opacity: active ? 1 : 0,
           }}
           transition={t}
