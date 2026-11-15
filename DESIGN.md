@@ -68,6 +68,9 @@ Angka harga memakai `.tabular`.
 - **Ikon**: seluruhnya `lucide-react` dengan `strokeWidth` 1 sampai 1.5. Tidak
   ada ikon SVG buatan tangan. Lucide 1.x tidak memuat ikon merek, jadi tautan
   Instagram di footer ditulis sebagai teks ("Instagram @bakalkopi.id").
+- **FAQ**: [`Faq3`](src/components/ui/faq3.tsx) di atas
+  [`accordion.tsx`](src/components/ui/accordion.tsx) (shadcn `base-nova`, Base UI).
+  Satu jawaban terbuka sekaligus; jawaban tetap di HTML (`hiddenUntilFound`).
 - **Peralihan bagian**: [`TornEdge`](src/components/torn-edge.tsx), tepi sobek
   yang kurvanya tidak berulang.
 - **Judul bagian**: [`SectionHeading`](src/components/section-heading.tsx).

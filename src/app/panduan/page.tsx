@@ -4,10 +4,11 @@ import Link from "next/link";
 import { JsonLd } from "@/components/json-ld";
 import { PageHeader, PageShell } from "@/components/page/page-shell";
 import { PageCta, TEXT_LINK } from "@/components/page/prose";
+import { Faq3 } from "@/components/ui/faq3";
 import { GUIDES } from "@/lib/guides";
 import { PRICE_RANGE } from "@/lib/menu";
 import { absoluteUrl, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
-import { ADDRESS_LINE, HOURS_LINE, SITE } from "@/lib/site";
+import { ADDRESS_LINE, HOURS_LINE, SITE, WA_TANYA } from "@/lib/site";
 
 const PATH = "/panduan";
 
@@ -111,19 +112,20 @@ export default function PanduanPage() {
           .
         </p>
 
-        <section aria-labelledby="faq" className="mt-16 border-t border-taupe pt-10 md:mt-20">
-          <h2 id="faq" className="text-headline-sm text-charcoal">
-            Pertanyaan yang sering diajukan
-          </h2>
-          <dl className="mt-8 flex flex-col divide-y divide-taupe/70">
-            {FAQ.map(({ q, a }) => (
-              <div key={q} className="py-5 first:pt-0">
-                <dt className="text-serif-md text-charcoal">{q}</dt>
-                <dd className="text-body-lg mt-2 text-charcoal/75">{a}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+        <Faq3
+          heading="Pertanyaan yang sering diajukan"
+          description={
+            <>
+              Pertanyaan lain bisa dikirim lewat{" "}
+              <Link href={WA_TANYA} target="_blank" rel="noopener noreferrer" className={TEXT_LINK}>
+                WhatsApp {SITE.contact.whatsappDisplay}
+              </Link>
+              .
+            </>
+          }
+          items={FAQ.map(({ q, a }, i) => ({ id: `faq-${i + 1}`, question: q, answer: a }))}
+          className="mt-16 border-t border-taupe pt-10 md:mt-20"
+        />
 
         <div className="mt-16">
           <PageCta />
