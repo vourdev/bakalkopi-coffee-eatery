@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Parisienne, Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
-import { ADDRESS_LINE, HOURS_LINE, SITE } from "@/lib/site";
+import { JsonLd } from "@/components/json-ld";
+import { PRICE_RANGE } from "@/lib/menu";
+import { BUSINESS_ID, ORG_ID, WEBSITE_ID, absoluteUrl } from "@/lib/seo";
+import { ADDRESS_LINE, HOURS_LINE, SITE, WA_RESERVASI } from "@/lib/site";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -55,7 +58,13 @@ export const metadata: Metadata = {
     "kafe parkir luas depok",
     "live akustik depok",
   ],
-  alternates: { canonical: "/" },
+  authors: [{ name: SITE.legalName, url: SITE.url }],
+  creator: SITE.legalName,
+  publisher: SITE.legalName,
+  appleWebApp: { title: SITE.name },
+  referrer: "strict-origin-when-cross-origin",
+  // Token dari Search Console; tanpa env tag verifikasi tidak dirender.
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
   openGraph: {
     type: "website",
     locale: "id_ID",
@@ -78,60 +87,99 @@ export const metadata: Metadata = {
   category: "food",
 };
 
-const JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "CafeOrCoffeeShop",
-  "@id": `${SITE.url}#business`,
-  name: SITE.name,
-  legalName: SITE.legalName,
-  description: DESCRIPTION,
-  url: SITE.url,
-  image: `${SITE.url}/images/BakalKopi-home.jpg`,
-  logo: `${SITE.url}/images/logo.png`,
-  slogan: SITE.tagline,
-  telephone: `+${SITE.contact.whatsapp}`,
-  priceRange: "Rp22.000-Rp55.000",
-  servesCuisine: ["Indonesia", "Nusantara", "Kopi", "Pasta"],
-  currenciesAccepted: "IDR",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: SITE.address.street,
-    addressLocality: SITE.address.city,
-    addressRegion: SITE.address.region,
-    postalCode: SITE.address.postalCode,
-    addressCountry: SITE.address.country,
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: SITE.geo.lat,
-    longitude: SITE.geo.lng,
-  },
-  hasMap: SITE.maps.place,
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      opens: SITE.hours.opens,
-      closes: SITE.hours.closes,
-    },
-  ],
-  sameAs: [SITE.contact.instagramUrl],
-  amenityFeature: [
-    { "@type": "LocationFeatureSpecification", name: "Wi-Fi", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Parkir luas", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Ruang ber-AC", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Teras terbuka", value: true },
-    { "@type": "LocationFeatureSpecification", name: "Ramah keluarga", value: true },
-  ],
+const ADDRESS = {
+  "@type": "PostalAddress",
+  streetAddress: SITE.address.street,
+  addressLocality: SITE.address.city,
+  addressRegion: SITE.address.region,
+  postalCode: SITE.address.postalCode,
+  addressCountry: SITE.address.country,
 };
+
+// Tiga entitas saling merujuk lewat @id: pemilik usaha, situs, dan tempatnya.
+const JSON_LD = [
+  {
+    "@type": "Organization",
+    "@id": ORG_ID,
+    name: SITE.name,
+    legalName: SITE.legalName,
+    url: SITE.url,
+    logo: absoluteUrl("/images/logo.png"),
+    slogan: SITE.tagline,
+    address: ADDRESS,
+    sameAs: [SITE.contact.instagramUrl],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "reservations",
+      telephone: `+${SITE.contact.whatsapp}`,
+      url: WA_RESERVASI,
+      areaServed: "ID",
+      availableLanguage: ["id"],
+    },
+  },
+  {
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    name: SITE.name,
+    url: SITE.url,
+    inLanguage: "id-ID",
+    publisher: { "@id": ORG_ID },
+  },
+  {
+    "@type": "CafeOrCoffeeShop",
+    "@id": BUSINESS_ID,
+    name: SITE.name,
+    legalName: SITE.legalName,
+    description: DESCRIPTION,
+    url: SITE.url,
+    image: absoluteUrl("/images/BakalKopi-home.jpg"),
+    logo: absoluteUrl("/images/logo.png"),
+    slogan: SITE.tagline,
+    telephone: `+${SITE.contact.whatsapp}`,
+    priceRange: PRICE_RANGE,
+    servesCuisine: ["Indonesia", "Nusantara", "Kopi", "Pasta"],
+    currenciesAccepted: "IDR",
+    hasMenu: absoluteUrl("/menu"),
+    acceptsReservations: true,
+    parentOrganization: { "@id": ORG_ID },
+    address: ADDRESS,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: SITE.geo.lat,
+      longitude: SITE.geo.lng,
+    },
+    hasMap: SITE.maps.place,
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: SITE.hours.opens,
+        closes: SITE.hours.closes,
+      },
+    ],
+    sameAs: [SITE.contact.instagramUrl],
+    amenityFeature: [
+      { "@type": "LocationFeatureSpecification", name: "Wi-Fi", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Parkir luas", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Ruang ber-AC", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Teras terbuka", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Ramah keluarga", value: true },
+    ],
+    potentialAction: {
+      "@type": "ReserveAction",
+      target: WA_RESERVASI,
+      result: { "@type": "FoodEstablishmentReservation" },
+    },
+  },
+];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -140,11 +188,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${playfair.variable} ${jakarta.variable} ${parisienne.variable} antialiased`}
     >
       <head>
-        <script
-          type="application/ld+json"
-          // Nilainya konstanta milik kita sendiri, bukan masukan pengguna.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
-        />
+        <JsonLd data={JSON_LD} />
         <meta name="geo.position" content={`${SITE.geo.lat};${SITE.geo.lng}`} />
         <meta name="geo.placename" content={`${SITE.name}, ${SITE.address.city}`} />
         <meta name="geo.region" content="ID-JB" />

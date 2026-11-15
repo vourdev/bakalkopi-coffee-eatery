@@ -3,7 +3,7 @@ import AnimatedContent from "@/components/reactbits/animated-content";
 import { SectionHeading } from "@/components/section-heading";
 import { TornEdge } from "@/components/torn-edge";
 
-const AMENITIES = [
+export const AMENITIES = [
   {
     Icon: Wifi,
     title: "Wi-Fi",

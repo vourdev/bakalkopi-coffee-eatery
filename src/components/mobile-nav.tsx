@@ -36,7 +36,7 @@ export function MobileNav({ links, activeId, onDark }: MobileNavProps) {
       <Dialog.Trigger
         aria-label="Buka menu navigasi"
         className={[
-          "text-label-caps inline-flex h-11 cursor-pointer items-center gap-2 rounded-full px-3 transition-colors active:scale-95 lg:hidden",
+          "text-label-caps inline-flex h-11 cursor-pointer items-center gap-2 rounded-full px-3 transition-colors active:scale-95 xl:hidden",
           onDark
             ? "text-cream-light hover:bg-cream-light/10"
             : "text-charcoal hover:bg-taupe/30",

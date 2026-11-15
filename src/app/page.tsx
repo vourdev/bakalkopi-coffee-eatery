@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Story } from "@/components/sections/story";
@@ -9,6 +10,9 @@ import { Gallery } from "@/components/sections/gallery";
 import { Amenities } from "@/components/sections/amenities";
 import { Lokasi } from "@/components/sections/lokasi";
 import { Footer } from "@/components/footer";
+
+// Canonical di sini, bukan di layout, agar tidak diwarisi halaman lain.
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function Home() {
   return (

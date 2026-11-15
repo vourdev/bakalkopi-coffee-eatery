@@ -13,14 +13,18 @@ import { MobileNav } from "@/components/mobile-nav";
 import { FillButton } from "@/components/ui/fill-button";
 import { SITE, WA_RESERVASI } from "@/lib/site";
 
+// Href diawali "/" agar tetap berfungsi dari halaman panduan; id mengikat ke bagian di beranda.
 const NAV_LINKS = [
-  { label: "Beranda", href: "#beranda", id: "beranda" },
-  { label: "Cerita", href: "#cerita", id: "cerita" },
-  { label: "Menu", href: "#menu", id: "menu" },
-  { label: "Galeri", href: "#galeri", id: "galeri" },
-  { label: "Reservasi", href: "#lokasi", id: "lokasi" },
-  { label: "Kontak", href: "#kontak", id: "kontak" },
+  { label: "Beranda", href: "/#beranda", id: "beranda" },
+  { label: "Cerita", href: "/#cerita", id: "cerita" },
+  { label: "Menu", href: "/#menu", id: "menu" },
+  { label: "Galeri", href: "/#galeri", id: "galeri" },
+  { label: "Reservasi", href: "/#lokasi", id: "lokasi" },
+  { label: "Panduan", href: "/panduan", id: "panduan" },
+  { label: "Kontak", href: "/kontak", id: "kontak" },
 ] as const;
+
+export type NavId = (typeof NAV_LINKS)[number]["id"];
 
 const SECTION_IDS = NAV_LINKS.map((link) => link.id);
 
@@ -52,9 +56,15 @@ function useActiveSection(ids: readonly string[]) {
   return active;
 }
 
-export function Navbar() {
+interface NavbarProps {
+  /** Tautan aktif tetap untuk halaman di luar beranda, yang tidak punya bagian untuk diamati. */
+  activeId?: NavId;
+}
+
+export function Navbar({ activeId }: NavbarProps = {}) {
   const [scrolled, setScrolled] = useState(false);
-  const active = useActiveSection(SECTION_IDS);
+  const observed = useActiveSection(SECTION_IDS);
+  const active = activeId ?? observed;
   const { scrollY } = useScroll();
 
   // React melewati render bila boolean sama, jadi tiap frame gulir tidak me-render ulang.
@@ -80,12 +90,13 @@ export function Navbar() {
       ].join(" ")}
     >
       <div className="mx-auto flex h-16 max-w-7xl md:h-20 items-center justify-between px-5 md:px-10">
-        <Link href="#beranda" aria-label={SITE.name} className="group">
+        <Link href="/#beranda" aria-label={SITE.name} className="group">
           <BrandMark tone={solid ? "light" : "dark"} />
         </Link>
 
+        {/* 7 tautan baru muat di xl; di bawahnya pakai menu ponsel. */}
         <nav
-          className="hidden items-center gap-9 lg:flex"
+          className="hidden items-center gap-9 xl:flex"
           onMouseLeave={() => setHovered(null)}
           onBlur={(e) => {
             if (!e.currentTarget.contains(e.relatedTarget)) setHovered(null);
@@ -132,7 +143,7 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex shrink-0 items-center gap-1.5">
           {/* Pembungkus memegang hidden/sm:flex agar tidak bentrok dengan inline-flex tombol. */}
           <div className="hidden sm:flex">
             <FillButton
@@ -140,7 +151,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className={[
-                "text-label-caps min-h-11 rounded-full px-6 py-3 transition-colors duration-200 active:scale-95",
+                "text-label-caps min-h-11 whitespace-nowrap rounded-full px-6 py-3 transition-colors duration-200 active:scale-95",
                 solid
                   ? "bg-charcoal text-cream-light"
                   : "border border-cream-light/45 text-cream-light",
