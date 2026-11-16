@@ -119,12 +119,7 @@ export default function MenuPage() {
         </div>
 
         <p className="text-body-sm mt-10 text-charcoal/60">
-          Harga belum termasuk PB1. Hidangan bertanda Andalan,
-          Favorit, Spesial, atau Warisan dibahas di{" "}
-          <Link href="/panduan/menu-andalan" className="text-gold-deep underline underline-offset-4">
-            panduan menu andalan
-          </Link>
-          .
+          Harga belum termasuk PB1.
         </p>
 
         <div className="mt-12">

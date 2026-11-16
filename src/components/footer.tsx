@@ -3,10 +3,9 @@ import Link from "next/link";
 import { Clock, MapPin, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Ornament } from "@/components/ornament";
-import { GUIDES } from "@/lib/guides";
 import { ADDRESS_LINE, HOURS_LINE, SITE, WA_TANYA } from "@/lib/site";
 
-// Diawali "/" agar tetap mengarah ke beranda saat footer tampil di halaman panduan.
+// Diawali "/" agar tetap mengarah ke beranda saat footer tampil di subhalaman.
 const EXPLORE_LINKS = [
   { label: "Cerita & Filosofi", href: "/#cerita" },
   { label: "Suasana & Akustik", href: "/#suasana" },
@@ -16,9 +15,7 @@ const EXPLORE_LINKS = [
 
 const INFO_LINKS = [
   { label: "Menu Lengkap & Harga", href: "/menu" },
-  ...GUIDES.map((g) => ({ label: g.navLabel, href: `/panduan/${g.slug}` })),
   { label: "Tentang Kami", href: "/tentang" },
-  { label: "Kontak", href: "/kontak" },
 ];
 
 const LINK_CLASS =
@@ -60,9 +57,9 @@ export function Footer() {
             ))}
           </nav>
 
-          <nav className="flex flex-col items-start" aria-label="Panduan dan informasi">
+          <nav className="flex flex-col items-start" aria-label="Informasi">
             <h2 className="text-label-caps mb-2 text-cream-light">
-              Panduan
+              Informasi
             </h2>
             {INFO_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className={LINK_CLASS}>

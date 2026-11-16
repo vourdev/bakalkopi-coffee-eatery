@@ -68,9 +68,6 @@ Angka harga memakai `.tabular`.
 - **Ikon**: seluruhnya `lucide-react` dengan `strokeWidth` 1 sampai 1.5. Tidak
   ada ikon SVG buatan tangan. Lucide 1.x tidak memuat ikon merek, jadi tautan
   Instagram di footer ditulis sebagai teks ("Instagram @bakalkopi.id").
-- **FAQ**: [`Faq3`](src/components/ui/faq3.tsx) di atas
-  [`accordion.tsx`](src/components/ui/accordion.tsx) (shadcn `base-nova`, Base UI).
-  Satu jawaban terbuka sekaligus; jawaban tetap di HTML (`hiddenUntilFound`).
 - **Peralihan bagian**: [`TornEdge`](src/components/torn-edge.tsx), tepi sobek
   yang kurvanya tidak berulang.
 - **Judul bagian**: [`SectionHeading`](src/components/section-heading.tsx).
@@ -78,9 +75,8 @@ Angka harga memakai `.tabular`.
   agar irama halaman tidak seragam. Eyebrow (label kapital di atas judul)
   hanya di tiga tempat: Hero, Menu, Lokasi. Bagian lain langsung dibuka judul.
   Subhalaman tidak memakai eyebrow; penggantinya breadcrumb di `PageHeader`.
-- **Navigasi**: 7 tautan (Beranda, Cerita, Menu, Galeri, Reservasi, Panduan,
-  Kontak). Baris tautan desktop baru tampil mulai `xl`; di bawahnya menu ponsel,
-  karena di `lg` tujuh tautan menggencet tombol "Pesan Meja".
+- **Navigasi**: 5 tautan ke bagian beranda (Beranda, Cerita, Menu, Galeri,
+  Reservasi). Baris tautan desktop mulai `lg`; di bawahnya menu ponsel.
 - **Hero**: eyebrow, H1 dua baris (kalimat terakhir slogan berdiri sendiri;
   di ponsel putus per kalimat), satu paragraf, dua aksi. Tidak ada strip fakta
   di bawah tombol. Tinggi `min-h-dvh`.
@@ -95,15 +91,12 @@ di ponsel, `h-20` mulai `md`. Grid berpindah tiga keadaan bila isinya perlu
 Subhalaman memakai [`PageShell` dan `PageHeader`](src/components/page/page-shell.tsx):
 pita gelap dengan breadcrumb dan H1, lalu isi di kolom baca `max-w-3xl`
 ([`prose.tsx`](src/components/page/prose.tsx): `Article`, `Section`,
-`PageCta`). Panduan memakai [`GuideLayout`](src/components/page/guide-layout.tsx).
+`PageCta`).
 
 | Rute | Isi |
 | --- | --- |
 | `/menu` | Seluruh menu dan harga, JSON-LD `Menu` |
-| `/panduan` | Daftar panduan dan FAQ (`FAQPage`) |
-| `/panduan/[slug]` | Empat panduan, terdaftar di [guides.ts](src/lib/guides.ts) |
 | `/tentang` | Cerita dan identitas usaha (`AboutPage`) |
-| `/kontak` | WhatsApp, Instagram, alamat, peta (`ContactPage`) |
 
 ```
 Hero (gelap) → Cerita → Favorit → Menu (terang)
@@ -136,12 +129,12 @@ guard menyeluruh.
 
 Alamat, koordinat, jam buka, WhatsApp, dan Instagram hanya ada di
 [src/lib/site.ts](src/lib/site.ts). Menu dan harga hanya ada di
-[src/lib/menu.ts](src/lib/menu.ts) (tab beranda, `/menu`, panduan, dan
+[src/lib/menu.ts](src/lib/menu.ts) (tab beranda, `/menu`, dan
 `priceRange` membaca dari sana). Ubah di satu tempat.
 
 JSON-LD di [layout.tsx](src/app/layout.tsx) berupa `@graph`: `Organization`,
 `WebSite`, dan `CafeOrCoffeeShop`, saling merujuk lewat `@id` dari
-[seo.ts](src/lib/seo.ts). Node halaman (Article, Menu, FAQPage) merujuk @id
+[seo.ts](src/lib/seo.ts). Node halaman (Menu, AboutPage) merujuk @id
 yang sama. Metadata subhalaman dibuat lewat `pageMetadata()`, yang mengisi ulang
 canonical, `openGraph`, dan gambar pratinjau karena Next menggabungkan metadata
 secara dangkal. Tag verifikasi Google dibaca dari env
@@ -153,7 +146,7 @@ Aturan klaim (keputusan pemilik):
   Angka statistik, kecepatan Wi-Fi, jadwal musik, dan "gratis" tidak ditulis
   sampai pemilik memberi datanya.
 - Halal bersertifikat. Di beranda disebut di dua tempat saja: Fasilitas dan
-  Aturan Rumah di Lokasi. Di subhalaman hanya di `/panduan/fasilitas`.
+  Aturan Rumah di Lokasi. Tidak disebut di subhalaman.
 - Tidak ada tautan `tel:`: nomor itu WhatsApp, panggilan suara belum
   dipastikan. Belum ada email, nama pengelola, atau tahun berdiri.
 

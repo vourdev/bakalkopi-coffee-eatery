@@ -1,7 +1,5 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
 import { FillButton } from "@/components/ui/fill-button";
-import { GUIDES } from "@/lib/guides";
 import { SITE, WA_RESERVASI } from "@/lib/site";
 
 export const TEXT_LINK =
@@ -35,11 +33,8 @@ export function Section({
   );
 }
 
-/** Penutup halaman: ajakan reservasi lalu tautan ke panduan lain. */
-export function PageCta({ currentSlug }: { currentSlug?: string }) {
-  const others = GUIDES.filter((g) => g.slug !== currentSlug);
-  const heading = currentSlug === undefined ? "Panduan berkunjung" : "Panduan lain";
-
+/** Penutup halaman: ajakan reservasi lewat WhatsApp dan petunjuk arah. */
+export function PageCta() {
   return (
     <section className="rounded-[1.75rem] bg-charcoal p-7 text-cream-light md:p-10">
       <h2 className="text-headline-sm text-cream-light">Pesan meja lewat WhatsApp</h2>
@@ -68,31 +63,6 @@ export function PageCta({ currentSlug }: { currentSlug?: string }) {
         </FillButton>
       </div>
 
-      <nav aria-label={heading} className="mt-8 border-t border-cream-light/12 pt-6">
-        <h3 className="text-label-caps text-gold-light">{heading}</h3>
-        <ul className="mt-2 flex flex-col">
-          {others.map((g) => (
-            <li key={g.slug}>
-              <Link
-                href={`/panduan/${g.slug}`}
-                className="text-body-md inline-flex min-h-11 items-center text-cream-light/80 transition-colors hover:text-cream-light active:opacity-70"
-              >
-                {g.title}
-              </Link>
-            </li>
-          ))}
-          {currentSlug !== undefined && (
-            <li>
-              <Link
-                href="/menu"
-                className="text-body-md inline-flex min-h-11 items-center text-cream-light/80 transition-colors hover:text-cream-light active:opacity-70"
-              >
-                Menu lengkap dan harga
-              </Link>
-            </li>
-          )}
-        </ul>
-      </nav>
     </section>
   );
 }

@@ -1,4 +1,4 @@
-// Sumber tunggal menu: tab di beranda, halaman /menu, panduan, dan JSON-LD membaca dari sini.
+// Sumber tunggal menu: tab di beranda, halaman /menu, dan JSON-LD membaca dari sini.
 
 export interface Photo {
   src: string;

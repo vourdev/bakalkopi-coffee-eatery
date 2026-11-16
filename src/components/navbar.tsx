@@ -13,15 +13,13 @@ import { MobileNav } from "@/components/mobile-nav";
 import { FillButton } from "@/components/ui/fill-button";
 import { SITE, WA_RESERVASI } from "@/lib/site";
 
-// Href diawali "/" agar tetap berfungsi dari halaman panduan; id mengikat ke bagian di beranda.
+// Href diawali "/" agar tetap berfungsi dari subhalaman; id mengikat ke bagian di beranda.
 const NAV_LINKS = [
   { label: "Beranda", href: "/#beranda", id: "beranda" },
   { label: "Cerita", href: "/#cerita", id: "cerita" },
   { label: "Menu", href: "/#menu", id: "menu" },
   { label: "Galeri", href: "/#galeri", id: "galeri" },
   { label: "Reservasi", href: "/#lokasi", id: "lokasi" },
-  { label: "Panduan", href: "/panduan", id: "panduan" },
-  { label: "Kontak", href: "/kontak", id: "kontak" },
 ] as const;
 
 export type NavId = (typeof NAV_LINKS)[number]["id"];
@@ -94,9 +92,8 @@ export function Navbar({ activeId }: NavbarProps = {}) {
           <BrandMark tone={solid ? "light" : "dark"} />
         </Link>
 
-        {/* 7 tautan baru muat di xl; di bawahnya pakai menu ponsel. */}
         <nav
-          className="hidden items-center gap-9 xl:flex"
+          className="hidden items-center gap-7 lg:flex xl:gap-9"
           onMouseLeave={() => setHovered(null)}
           onBlur={(e) => {
             if (!e.currentTarget.contains(e.relatedTarget)) setHovered(null);

@@ -78,10 +78,6 @@ export default function TentangPage() {
             <Link href="/menu" className={TEXT_LINK}>
               halaman menu
             </Link>
-            , dan hidangan andalan dibahas di{" "}
-            <Link href="/panduan/menu-andalan" className={TEXT_LINK}>
-              panduan menu andalan
-            </Link>
             .
           </p>
         </Section>
@@ -103,13 +99,6 @@ export default function TentangPage() {
               </div>
             ))}
           </dl>
-          <p>
-            Cara menghubungi kami ada di halaman{" "}
-            <Link href="/kontak" className={TEXT_LINK}>
-              kontak
-            </Link>
-            .
-          </p>
         </Section>
 
         <PageCta />
