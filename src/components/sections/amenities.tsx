@@ -1,7 +1,7 @@
 import { AirVent, Car, Music2, ShieldCheck, TreePalm, Wifi } from "lucide-react";
 import AnimatedContent from "@/components/reactbits/animated-content";
 import { SectionHeading } from "@/components/section-heading";
-import { TornEdge } from "@/components/torn-edge";
+import { WaveDivider } from "@/components/wave-divider";
 
 export const AMENITIES = [
   {
@@ -62,7 +62,7 @@ export function Amenities() {
         </ul>
       </div>
 
-      <TornEdge color="#231c18" className="mt-16 md:mt-24" />
+      <WaveDivider fillColor="#231c18" variant="b" flip className="mt-16 md:mt-24" />
     </section>
   );
 }

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Tabs } from "@base-ui/react/tabs";
 import { SectionHeading } from "@/components/section-heading";
 import AnimatedContent from "@/components/reactbits/animated-content";
-import { TornEdge } from "@/components/torn-edge";
+import { WaveDivider } from "@/components/wave-divider";
 import { MENU_DATA } from "@/lib/menu";
 
 export function Menu() {
@@ -114,7 +114,7 @@ export function Menu() {
         </Tabs.Root>
       </div>
 
-      <TornEdge color="#231c18" className="mt-16 md:mt-28" />
+      <WaveDivider fillColor="#231c18" variant="c" className="mt-16 md:mt-28" />
     </section>
   );
 }

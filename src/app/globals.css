@@ -213,15 +213,75 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Hero ikut tinggi viewport juga, agar layar pendek-tapi-lebar tidak meluber. */
+/* Belah naskah-foto: --gutter menyamakan tepi kiri naskah dengan wadah max-w-7xl,
+   foto di kolom kedua lari sampai tepi kanan layar. */
+.split-bleed {
+  --gutter: max(1.25rem, calc((100vw - 80rem) / 2 + 2.5rem));
+}
+@media (min-width: 48rem) {
+  .split-bleed {
+    --gutter: max(2.5rem, calc((100vw - 80rem) / 2 + 2.5rem));
+  }
+}
+@media (min-width: 64rem) {
+  .split-bleed {
+    display: grid;
+    grid-template-columns: calc(var(--gutter) + min(40vw, 34rem)) minmax(0, 1fr);
+  }
+}
+
+/* Topeng sobek foto (src/lib/torn-mask.ts). Strip sobek berlebar tetap --torn-w / --torn-h,
+   sisanya diisi gradien pekat yang menimpa 1px agar tidak ada garis sambungan. */
+@utility torn-left {
+  -webkit-mask-image: var(--torn-left), linear-gradient(#000 0 0);
+  mask-image: var(--torn-left), linear-gradient(#000 0 0);
+  -webkit-mask-size: var(--torn-w) 100%, calc(100% - var(--torn-w) + 1px) 100%;
+  mask-size: var(--torn-w) 100%, calc(100% - var(--torn-w) + 1px) 100%;
+  -webkit-mask-position: left top, right top;
+  mask-position: left top, right top;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+@utility torn-top {
+  -webkit-mask-image: var(--torn-top), linear-gradient(#000 0 0);
+  mask-image: var(--torn-top), linear-gradient(#000 0 0);
+  -webkit-mask-size: 100% var(--torn-h), 100% calc(100% - var(--torn-h) + 1px);
+  mask-size: 100% var(--torn-h), 100% calc(100% - var(--torn-h) + 1px);
+  -webkit-mask-position: left top, left bottom;
+  mask-position: left top, left bottom;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+@utility torn-left-top {
+  -webkit-mask-image: var(--torn-left), var(--torn-top), linear-gradient(#000 0 0);
+  mask-image: var(--torn-left), var(--torn-top), linear-gradient(#000 0 0);
+  -webkit-mask-size:
+    var(--torn-w) 100%,
+    calc(100% - var(--torn-w) + 1px) var(--torn-h),
+    calc(100% - var(--torn-w) + 1px) calc(100% - var(--torn-h) + 1px);
+  mask-size:
+    var(--torn-w) 100%,
+    calc(100% - var(--torn-w) + 1px) var(--torn-h),
+    calc(100% - var(--torn-w) + 1px) calc(100% - var(--torn-h) + 1px);
+  -webkit-mask-position: left top, right top, right bottom;
+  mask-position: left top, right top, right bottom;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+/* Tiga baris, satu kalimat per baris. Ukuran dikunci ke lebar kolom naskah hero:
+   ~58% layar di ponsel, min(40vw, 34rem) mulai lg, agar "GOOD MOMENTS." tidak patah. */
 .hero-display {
   font-family: var(--font-display);
-  /* 3.75rem di max-w-4xl: "GOOD FOOD. GOOD COFFEE." muat satu baris mulai md. */
-  font-size: clamp(1.75rem, min(5.2vw, 7svh), 3.75rem);
+  font-size: clamp(1.3rem, 5.8vw, 2.5rem);
   font-weight: 500;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: 0.015em;
   text-transform: uppercase;
+}
+@media (min-width: 64rem) {
+  .hero-display {
+    font-size: clamp(2.5rem, 3.9vw, 3.5rem);
+  }
 }
 .hero-lead {
   font-family: var(--font-body);

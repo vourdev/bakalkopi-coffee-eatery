@@ -1,76 +1,65 @@
-import Image from "next/image";
 import AnimatedContent from "@/components/reactbits/animated-content";
 import { StoryVideo } from "@/components/story-video";
-import { LeafMark, Ornament } from "@/components/ornament";
+import { LeafMark } from "@/components/ornament";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+
+// Tepi sobek ala border-image: ubin PNG (krem, serat putih sobek, bayangan tipis, transparan) ditumpuk
+// di atas tepi foto dan diulang. Tepi atas foto selalu lurus. Desktop sobek di kiri, ponsel di bawah.
 
 export function Story() {
   return (
-    <section id="cerita" className="relative bg-cream py-16 text-charcoal md:py-28">
-      <LeafMark className="pointer-events-none absolute top-16 left-4 hidden h-28 w-28 -scale-x-100 text-gold/12 lg:block" />
+    <section id="cerita" className="split-bleed relative overflow-hidden bg-cream-light">
+      <div className="relative py-12 pr-5 pl-[var(--gutter)] md:pr-10 lg:py-24 lg:pr-12">
+        <AnimatedContent distance={22}>
+          <p className="text-label-caps flex items-center gap-3 text-charcoal/70">
+            Cerita Kami
+            <span aria-hidden="true" className="h-px w-10 bg-current" />
+          </p>
+          <h2 className="text-headline-lg mt-4 text-charcoal">
+            Lebih dari
+            <br />
+            sekadar kopi
+          </h2>
+        </AnimatedContent>
 
-      <div className="mx-auto max-w-7xl px-5 md:px-10">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-5">
-            <AnimatedContent distance={26}>
-              <h2 className="text-headline-lg text-charcoal">
-                Lebih dari
-                <br />
-                sekadar kopi
-              </h2>
+        <AnimatedContent delay={0.12} distance={18}>
+          <p className="text-body-lg mt-5 max-w-md text-charcoal/70">
+            BAKALKOPI mempertemukan kopi single origin, masakan rumahan Indonesia,
+            dan minuman racikan di ruang tropis yang sengaja dibuat untuk
+            memperlambat langkah.
+          </p>
 
-              <p className="text-script mt-2 text-4xl text-gold-deep md:text-5xl">
-                Rasa yang mengingatkan rumah
-              </p>
-            </AnimatedContent>
+          <InteractiveHoverButton
+            href="/tentang"
+            text="Baca Cerita Kami"
+            className="text-label-caps mt-8 rounded-md bg-coffee px-6 py-4 text-cream-light active:scale-95"
+            fillClassName="bg-gold text-charcoal"
+          />
+        </AnimatedContent>
 
-            <AnimatedContent delay={0.15} distance={22}>
-              <p className="text-body-lg mt-7 text-charcoal/70">
-                BAKALKOPI mempertemukan kopi single origin, masakan rumahan
-                Indonesia, dan minuman racikan di ruang tropis yang sengaja
-                dibuat untuk memperlambat langkah.
-              </p>
+        {/* Daun garis di sudut naskah, aksen botani seperti referensi. */}
+        <LeafMark className="pointer-events-none absolute right-6 bottom-8 hidden h-24 w-24 rotate-12 text-gold/45 sm:block lg:right-10 lg:bottom-16 lg:h-28 lg:w-28" />
+      </div>
 
-              <p className="text-serif-md mt-6 text-charcoal/75 italic">
-                Aroma nasi bakar daun pisang dan espresso yang baru diekstraksi,
-                dengan meja yang cukup lapang untuk berbincang.
-              </p>
-            </AnimatedContent>
-          </div>
-
-          {/* Video cerita, dengan kartu mural bertumpuk di sudutnya. */}
-          <AnimatedContent className="lg:col-span-7" delay={0.2} distance={36}>
-            <div className="relative pb-10 lg:pl-8">
-              <StoryVideo
-                src="/video/video-1.mp4"
-                poster="/images/room-4.jpg"
-                alt="Ruang dalam BAKALKOPI dengan mural proses kopi dan meja kayu"
-                label="Putar video cerita BAKALKOPI"
-              />
-
-              {/* Disembunyikan di bawah sm: di lebar ponsel kartu menutupi tombol putar. */}
-              <div className="absolute -bottom-2 left-0 hidden w-52 rounded-2xl border border-gold/25 bg-white p-3 shadow-2xl sm:left-6 sm:block sm:w-60">
-                <div className="h-32 overflow-hidden rounded-xl">
-                  <Image
-                    src="/images/quotes-background.jpg"
-                    alt="Mural bertuliskan Bakal Kopi Paling Mantap Rasa Kopinya"
-                    width={600}
-                    height={400}
-                    sizes="15rem"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="px-1.5 pt-3 pb-1">
-                  <p className="text-serif-md text-charcoal">Ruang Mural</p>
-                  <p className="text-body-sm mt-0.5 text-charcoal/70">
-                    Mural lukis tangan di dinding kafe
-                  </p>
-                </div>
-              </div>
-
-              <Ornament className="mt-8 flex justify-center text-gold lg:hidden" />
-            </div>
-          </AnimatedContent>
+      {/* Desktop: foto rapat ke pita fitur di atas, menyisakan krem di bawah seperti referensi. */}
+      <div className="relative h-[19rem] sm:h-[24rem] lg:mb-10 lg:h-auto lg:min-h-[32rem]">
+        <div className="absolute inset-0">
+          <StoryVideo
+            src="/video/video-1.mp4"
+            poster="/images/room-4.jpg"
+            alt="Ruang dalam BAKALKOPI dengan mural proses kopi dan meja kayu"
+            label="Putar video cerita BAKALKOPI"
+            variant="bleed"
+          />
         </div>
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-25 bg-[url(/images/torn-edge-left.png)] bg-repeat-y [background-size:100%_auto] lg:block"
+        />
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-[url(/images/torn-edge-bottom.png)] bg-repeat-x [background-size:auto_100%] lg:hidden"
+        />
       </div>
     </section>
   );

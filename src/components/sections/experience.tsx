@@ -2,9 +2,7 @@ import Image from "next/image";
 import { Armchair, Lightbulb } from "lucide-react";
 import AnimatedContent from "@/components/reactbits/animated-content";
 import { SectionHeading } from "@/components/section-heading";
-import { MarqueeBand } from "@/components/marquee-band";
-import { TornEdge } from "@/components/torn-edge";
-import { SITE } from "@/lib/site";
+import { WaveDivider } from "@/components/wave-divider";
 
 const AMBIENCE = [
   {
@@ -21,18 +19,7 @@ const AMBIENCE = [
 
 export function Experience() {
   return (
-    <>
-      <MarqueeBand
-        items={[
-          SITE.tagline,
-          "Kopi Single Origin",
-          "Masakan Nusantara",
-          "Live Akustik",
-          "Parkiran Luas",
-        ]}
-      />
-
-      <section id="suasana" className="relative bg-charcoal pt-16 text-cream-light md:pt-28">
+    <section id="suasana" className="relative bg-charcoal pt-16 text-cream-light md:pt-28">
         <div className="mx-auto max-w-7xl px-5 md:px-10">
           <SectionHeading
             tone="dark"
@@ -96,8 +83,7 @@ export function Experience() {
           </div>
         </div>
 
-        <TornEdge color="#f1eade" className="mt-16 md:mt-28" />
-      </section>
-    </>
+        <WaveDivider fillColor="#f1eade" variant="a" className="mt-16 md:mt-28" />
+    </section>
   );
 }

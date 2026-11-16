@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 import { Navbar, type NavId } from "@/components/navbar";
-import { TornEdge } from "@/components/torn-edge";
+import { WaveDivider } from "@/components/wave-divider";
 import type { Crumb } from "@/lib/seo";
 
 export function PageShell({
@@ -63,7 +63,7 @@ export function PageHeader({ crumbs, title, lead, meta }: PageHeaderProps) {
         <p className="text-body-lg mt-5 max-w-2xl text-cream-light/70">{lead}</p>
         {meta && <p className="text-body-sm mt-5 text-cream-light/60">{meta}</p>}
       </div>
-      <TornEdge color="#faf6ee" className="mt-6 md:mt-10" />
+      <WaveDivider fillColor="#faf6ee" className="mt-6 md:mt-10" />
     </section>
   );
 }

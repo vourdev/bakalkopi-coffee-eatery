@@ -99,7 +99,7 @@ export function Lokasi() {
                   href={WA_RESERVASI}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-label-caps rounded-full bg-gold px-8 py-4 text-charcoal active:scale-95"
+                  className="text-label-caps rounded-md bg-gold px-8 py-4 text-charcoal active:scale-95"
                   fillClassName="bg-cream-light text-charcoal"
                 >
                   Pesan Meja
@@ -108,7 +108,7 @@ export function Lokasi() {
                   href={SITE.maps.directions}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-label-caps rounded-full border border-cream-light/25 px-8 py-4 text-cream-light active:scale-95"
+                  className="text-label-caps rounded-md border border-cream-light/25 px-8 py-4 text-cream-light active:scale-95"
                   fillClassName="bg-cream-light text-charcoal"
                 >
                   Petunjuk Arah

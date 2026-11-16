@@ -11,6 +11,7 @@ import {
 import { BrandMark } from "@/components/brand-mark";
 import { MobileNav } from "@/components/mobile-nav";
 import { FillButton } from "@/components/ui/fill-button";
+import { CalendarCheck } from "lucide-react";
 import { SITE, WA_RESERVASI } from "@/lib/site";
 
 // Href diawali "/" agar tetap berfungsi dari subhalaman; id mengikat ke bagian di beranda.
@@ -57,9 +58,11 @@ function useActiveSection(ids: readonly string[]) {
 interface NavbarProps {
   /** Tautan aktif tetap untuk halaman di luar beranda, yang tidak punya bagian untuk diamati. */
   activeId?: NavId;
+  /** "light": header krem sejak awal (hero beranda krem). "dark": bening di atas pita gelap subhalaman. */
+  tone?: "light" | "dark";
 }
 
-export function Navbar({ activeId }: NavbarProps = {}) {
+export function Navbar({ activeId, tone = "dark" }: NavbarProps = {}) {
   const [scrolled, setScrolled] = useState(false);
   const observed = useActiveSection(SECTION_IDS);
   const active = activeId ?? observed;
@@ -73,8 +76,8 @@ export function Navbar({ activeId }: NavbarProps = {}) {
   const reduceMotion = useReducedMotion();
   const indicatorId = hovered ?? active;
 
-  // Bening di atas hero gelap; krem pekat begitu digulir karena sisa halaman terang.
-  const solid = scrolled;
+  // solid = teks gelap di latar krem; garis dan bayangan baru muncul setelah digulir.
+  const solid = tone === "light" || scrolled;
 
   return (
     // layoutRoot: header sticky, jadi animasi garis diukur relatif ke header, bukan halaman.
@@ -82,13 +85,20 @@ export function Navbar({ activeId }: NavbarProps = {}) {
       layoutRoot
       className={[
         "sticky top-0 z-50 w-full transition-all duration-300",
-        solid
+        scrolled
           ? "border-b border-taupe/50 bg-cream-light/92 shadow-[0_1px_20px_-8px_rgba(35,28,24,0.25)] backdrop-blur-md"
-          : "border-b border-transparent bg-transparent",
+          : solid
+            ? "border-b border-transparent bg-cream-light"
+            : "border-b border-transparent bg-transparent",
       ].join(" ")}
     >
-      <div className="mx-auto flex h-16 max-w-7xl md:h-20 items-center justify-between px-5 md:px-10">
-        <Link href="/#beranda" aria-label={SITE.name} className="group">
+      {/* Ponsel: hamburger kiri, logo tengah, reservasi kanan. Desktop: logo, tautan, tombol. */}
+      <div className="mx-auto grid h-16 max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-3 sm:px-5 md:h-20 md:px-10 lg:flex lg:justify-between">
+        <div className="justify-self-start lg:hidden">
+          <MobileNav links={NAV_LINKS} activeId={active} onDark={!solid} />
+        </div>
+
+        <Link href="/#beranda" aria-label={SITE.name} className="group flex min-h-11 items-center">
           <BrandMark tone={solid ? "light" : "dark"} />
         </Link>
 
@@ -140,26 +150,37 @@ export function Navbar({ activeId }: NavbarProps = {}) {
           })}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-1.5">
-          {/* Pembungkus memegang hidden/sm:flex agar tidak bentrok dengan inline-flex tombol. */}
-          <div className="hidden sm:flex">
+        <div className="flex shrink-0 items-center justify-self-end">
+          <a
+            href={WA_RESERVASI}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Pesan meja lewat WhatsApp"
+            className={[
+              "grid h-11 w-11 place-items-center rounded-md transition-colors active:scale-95 lg:hidden",
+              solid ? "text-charcoal hover:bg-taupe/30" : "text-cream-light hover:bg-cream-light/10",
+            ].join(" ")}
+          >
+            <CalendarCheck className="h-6 w-6" strokeWidth={1.5} />
+          </a>
+
+          {/* Pembungkus memegang hidden/lg:flex agar tidak bentrok dengan inline-flex tombol. */}
+          <div className="hidden lg:flex">
             <FillButton
               href={WA_RESERVASI}
               target="_blank"
               rel="noopener noreferrer"
               className={[
-                "text-label-caps min-h-11 whitespace-nowrap rounded-full px-6 py-3 transition-colors duration-200 active:scale-95",
+                "text-label-caps min-h-11 whitespace-nowrap rounded-md px-6 py-3 transition-colors duration-200 active:scale-95",
                 solid
-                  ? "bg-charcoal text-cream-light"
+                  ? "bg-coffee text-cream-light"
                   : "border border-cream-light/45 text-cream-light",
               ].join(" ")}
-              fillClassName={solid ? "bg-coffee text-cream-light" : "bg-gold text-charcoal"}
+              fillClassName={solid ? "bg-charcoal text-cream-light" : "bg-gold text-charcoal"}
             >
               Pesan Meja
             </FillButton>
           </div>
-
-          <MobileNav links={NAV_LINKS} activeId={active} onDark={!solid} />
         </div>
       </div>
     </motion.header>
