@@ -98,7 +98,7 @@ export function Hero() {
         variant="hero"
         mobileVariant="heroMobile"
         className="absolute inset-x-0 -bottom-px z-30"
-        height="h-[clamp(3rem,5.5vw,5.25rem)]"
+        height="h-[clamp(2.5rem,4.5vw,4.25rem)]"
         mobileHeight="h-10 sm:h-12"
       />
     </section>

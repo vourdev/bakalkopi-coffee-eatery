@@ -1,10 +1,10 @@
 // Jalur dilebihkan melewati viewBox dan tepi menimpa satu piksel, agar antialias tidak meninggalkan garis rambut.
 
 const WAVES = {
-  // Siluet hero → pita fitur, diukur dari referensi desktop: punuk lebar kiri, lembah dalam, lalu naik bertahap.
+  // Siluet hero → pita fitur, diukur dari referensi desktop: punuk 5%, lembah 24%, puncak 38%, lembah dangkal 52%, lalu naik landai.
   hero: {
-    viewBox: "0 0 1440 110",
-    d: "M0,33 C40,30 120,18 180,19 C240,20 330,32 388,47 C420,55 440,61 470,60 C520,58 600,38 651,35 C690,32 700,28 735,29 C780,31 800,42 840,48 C890,55 930,58 970,57 C1030,55 1120,40 1177,37 C1250,34 1360,33 1440,26 L1440,120 L0,120 Z",
+    viewBox: "0 0 1440 90",
+    d: "M0,22 C18.2,21.7 46.2,19.6 69,20 C91.8,20.4 114.2,21.8 137,24.5 C159.8,27.2 183.2,31.9 206,36 C228.8,40.1 251.2,45.7 274,49 C296.8,52.3 320,56 343,56 C366,56 389.2,53 412,49 C434.8,45 457.2,35.9 480,32 C502.8,28.1 526.2,25.9 549,25.6 C571.8,25.3 594.2,27.4 617,30 C639.8,32.6 663.2,38.3 686,41 C708.8,43.7 731.2,46 754,46 C776.8,46 800.2,41.4 823,41 C845.8,40.6 861.5,42 891,43.5 C920.5,45 956.8,51.4 1000,50 C1043.2,48.6 1100,39 1150,35 C1200,31 1251.7,28.2 1300,26 C1348.3,23.8 1410,22.7 1440,22 L1440,100 L0,100 Z",
   },
   // Versi ponsel: lebih sedikit punuk agar tidak terlipat rapat saat diperas ke 360px.
   heroMobile: {

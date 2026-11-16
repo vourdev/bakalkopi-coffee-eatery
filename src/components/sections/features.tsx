@@ -14,7 +14,7 @@ export function Features() {
   return (
     <section aria-label="Keunggulan BAKALKOPI" className="bg-charcoal text-cream-light">
       {/* Ponsel 2x2 dengan garis silang; desktop satu baris dengan pemisah tegak. */}
-      <ul className="mx-auto grid max-w-7xl grid-cols-2 px-5 pt-6 pb-4 md:px-10 md:pt-8 lg:grid-cols-4 lg:pb-10">
+      <ul className="mx-auto grid max-w-7xl grid-cols-2 px-5 pt-6 pb-4 md:px-10 md:pt-8 lg:grid-cols-4 lg:pt-1 lg:pb-8">
         {FEATURES.map(({ Icon, title, desc }, i) => (
           <li
             key={title}
